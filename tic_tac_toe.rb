@@ -4,7 +4,7 @@ require 'pry-byebug'
 
 # Game board class
 class Board
-  attr_accessor :board_markers
+  attr_accessor :markers
 
   LINES = [
     [0, 1, 2],
@@ -23,35 +23,35 @@ class Board
   end
 
   def reset
-    @board_markers = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+    @markers = [0, 1, 2, 3, 4, 5, 6, 7, 8]
   end
 
   def display_board
-    puts " #{@board_markers[0]} | #{@board_markers[1]} | #{@board_markers[2]} "
+    puts " #{@markers[0]} | #{@markers[1]} | #{@markers[2]} "
     puts '---+---+---'
-    puts " #{@board_markers[3]} | #{@board_markers[4]} | #{@board_markers[5]} "
+    puts " #{@markers[3]} | #{@markers[4]} | #{@markers[5]} "
     puts '---+---+---'
-    puts " #{@board_markers[6]} | #{@board_markers[7]} | #{@board_markers[8]} "
+    puts " #{@markers[6]} | #{@markers[7]} | #{@markers[8]} "
   end
 
   # https://medium.com/launch-school/number-validation-with-regex-ruby-393954e46797
-  def number?(obj)
-    obj = obj.to_s unless obj.is_a? String
-    /\A[+-]?\d+(\.\d+)?\z/.match(obj)
+  def number_string?(str)
+    str = str.to_s unless str.is_a? String
+    /\A[+-]?\d+(\.\d+)?\z/.match(str)
   end
 
   def valid_position?(position)
-    return unless number?(position) && position.size == 1 &&
-                  !%w[X O].include?(@board_markers[position.to_i])
+    return unless number_string?(position) && position.size == 1 &&
+                  !%w[X O].include?(@markers[position.to_i])
 
-    @board_markers.include?(position.to_i)
+    @markers.include?(position.to_i)
   end
 
   def winner?
     winner = false
     LINES.each do |line|
-      if @board_markers[line[0]] == @board_markers[line[1]] &&
-         @board_markers[line[0]] == @board_markers[line[2]]
+      if @markers[line[0]] == @markers[line[1]] &&
+         @markers[line[0]] == @markers[line[2]]
         winner = true
       end
     end
@@ -112,7 +112,7 @@ until play_game == 'n'
     next unless board.valid_position?(position)
 
     # puts "You chose position #{position}"
-    board.board_markers[position.to_i] = player.marker
+    board.markers[position.to_i] = player.marker
     player = players.next unless board.winner?
   end
 
