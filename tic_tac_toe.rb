@@ -18,8 +18,12 @@ class Board
   ]
 
   def initialize
-    @board_markers = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+    reset
     # display_board
+  end
+
+  def reset
+    @board_markers = [0, 1, 2, 3, 4, 5, 6, 7, 8]
   end
 
   def display_board
@@ -36,25 +40,18 @@ class Board
     /\A[+-]?\d+(\.\d+)?\z/.match(obj)
   end
 
-  def float?(_value)
-    !!Float(value)
-  rescue StandardError
-    false
-  end
-
   def valid_position?(position)
-    # binding.pry
-    return unless number?(position) && !float?(position)
+    return unless number?(position) && position.size == 1 &&
+                  !%w[X O].include?(@board_markers[position.to_i])
 
     @board_markers.include?(position.to_i)
   end
 
   def winner?
-    # binding.pry
-
     winner = false
     LINES.each do |line|
-      if @board_markers[line[0]] == @board_markers[line[1]] && @board_markers[line[0]] == @board_markers[line[2]]
+      if @board_markers[line[0]] == @board_markers[line[1]] &&
+         @board_markers[line[0]] == @board_markers[line[2]]
         winner = true
       end
     end
@@ -104,16 +101,24 @@ players = Player.players.cycle
 
 player = players.next
 
-until board.winner?
+play_game = 'y'
+until play_game == 'n'
+  board.reset
+
+  until board.winner?
+    board.display_board
+    puts "Please choose a position (0-8) to place your #{player.marker} marker"
+    position = gets.chomp.strip
+    next unless board.valid_position?(position)
+
+    # puts "You chose position #{position}"
+    board.board_markers[position.to_i] = player.marker
+    player = players.next unless board.winner?
+  end
+
   board.display_board
-  puts "Please choose a position (0-8) to place your #{player.marker} marker"
-  position = gets.chomp.strip
-  next unless board.valid_position?(position)
+  puts "#{player.name} (#{player.marker}) wins!"
 
-  # puts "You chose position #{position}"
-  board.board_markers[position.to_i] = player.marker
-  player = players.next unless board.winner?
+  puts 'Play again? (y/n)'
+  play_game = gets.chomp.strip
 end
-
-board.display_board
-puts "#{player.name} (#{player.marker}) wins!"
