@@ -15,7 +15,7 @@ class Board
     [2, 5, 8],
     [0, 4, 8],
     [2, 4, 6]
-  ]
+  ].freeze
 
   def initialize
     reset
@@ -117,8 +117,8 @@ until play_game == 'n'
   end
 
   board.display_board
-  puts "#{player.name} (#{player.marker}) wins!"
+  puts "\n#{player.name} (#{player.marker}) wins!"
 
-  puts 'Play again? (y/n)'
+  puts "\nPlay again? (y/n)"
   play_game = gets.chomp.strip
 end
