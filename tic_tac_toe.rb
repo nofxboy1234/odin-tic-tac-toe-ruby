@@ -25,6 +25,8 @@ class Player
   @@players = []
   @count = 0
 
+  attr_accessor :marker
+
   def initialize(marker, name)
     # binding.pry
     @marker = marker
@@ -70,7 +72,10 @@ Player.show_players
 puts 'Please choose a position to place your X marker'
 position = gets.chomp
 puts "You chose position #{position}"
+# Update board
+board.board_markers[position.to_i] = player_one.marker
 # Display board with marker
+board.display_board
 
 # Check if there's a winning line
 
