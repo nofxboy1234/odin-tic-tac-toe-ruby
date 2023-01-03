@@ -1,31 +1,50 @@
 # frozen_string_literal: true
 
+require 'pry-byebug'
+
 # Game board class
 class Board
+  attr_accessor :board_markers
+
   def initialize
-    puts ' 0 | 1 | 2 '
+    @board_markers = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+    display_board
+  end
+
+  def display_board
+    puts " #{@board_markers[0]} | #{@board_markers[1]} | #{@board_markers[2]} "
     puts '---+---+---'
-    puts ' 3 | 4 | 5 '
+    puts " #{@board_markers[3]} | #{@board_markers[4]} | #{@board_markers[5]} "
     puts '---+---+---'
-    puts ' 6 | 7 | 8 '
+    puts " #{@board_markers[6]} | #{@board_markers[7]} | #{@board_markers[8]} "
   end
 end
-
-require 'pry-byebug'
 
 # Player class
 class Player
   @@players = []
+  @count = 0
+
   def initialize(marker, name)
     # binding.pry
     @marker = marker
     @name = name
     @@players << self
+    self.class.count += 1
     # p @@players
   end
 
   def self.show_players
     p @@players
+    p @count
+  end
+
+  class << self
+    attr_reader :count
+  end
+
+  class << self
+    attr_writer :count
   end
 end
 
@@ -51,9 +70,10 @@ Player.show_players
 puts 'Please choose a position to place your X marker'
 position = gets.chomp
 puts "You chose position #{position}"
-# Display board
+# Display board with marker
+
 # Check if there's a winning line
 
 # Ask player 2 for a position to place marker
-# Display board
+# Display board with marker
 # Check if there's a winning line
