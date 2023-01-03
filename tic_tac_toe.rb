@@ -19,7 +19,7 @@ class Board
 
   def initialize
     @board_markers = [0, 1, 2, 3, 4, 5, 6, 7, 8]
-    display_board
+    # display_board
   end
 
   def display_board
@@ -28,6 +28,25 @@ class Board
     puts " #{@board_markers[3]} | #{@board_markers[4]} | #{@board_markers[5]} "
     puts '---+---+---'
     puts " #{@board_markers[6]} | #{@board_markers[7]} | #{@board_markers[8]} "
+  end
+
+  # https://medium.com/launch-school/number-validation-with-regex-ruby-393954e46797
+  def number?(obj)
+    obj = obj.to_s unless obj.is_a? String
+    /\A[+-]?\d+(\.\d+)?\z/.match(obj)
+  end
+
+  def float?(_value)
+    !!Float(value)
+  rescue StandardError
+    false
+  end
+
+  def valid_position?(position)
+    # binding.pry
+    return unless number?(position) && !float?(position)
+
+    @board_markers.include?(position.to_i)
   end
 
   def winner?
@@ -83,13 +102,18 @@ Player.new('X', 'Player 1')
 Player.new('O', 'Player 2')
 players = Player.players.cycle
 
+player = players.next
+
 until board.winner?
-  player = players.next
-  puts "Please choose a position to place your #{player.marker} marker"
-  position = gets.chomp.to_i
-  puts "You chose position #{position}"
-  board.board_markers[position] = player.marker
   board.display_board
+  puts "Please choose a position (0-8) to place your #{player.marker} marker"
+  position = gets.chomp.strip
+  next unless board.valid_position?(position)
+
+  # puts "You chose position #{position}"
+  board.board_markers[position.to_i] = player.marker
+  player = players.next unless board.winner?
 end
 
+board.display_board
 puts "#{player.name} (#{player.marker}) wins!"
