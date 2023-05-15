@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'pry-byebug'
+
 # Game board class
 class Board
   attr_accessor :markers
@@ -15,6 +17,10 @@ class Board
     [2, 4, 6]
   ].freeze
 
+  def initialize
+    reset
+  end
+
   def reset
     @markers = [0, 1, 2, 3, 4, 5, 6, 7, 8]
   end
@@ -26,37 +32,32 @@ class Board
     puts '---+---+---'
     puts " #{@markers[6]} | #{@markers[7]} | #{@markers[8]} "
   end
-  
+
   def valid_position?(position)
-    return unless number_string?(position) && position.size == 1 &&
-    position_free?(position)
-    
-    @markers.include?(position.to_i)
+    number_string?(position) && @markers.include?(position.to_i) &&
+      position_free?(position)
   end
 
   def winner?
     winner = false
     LINES.each do |line|
       if @markers[line[0]] == @markers[line[1]] &&
-        @markers[line[0]] == @markers[line[2]]
+         @markers[line[0]] == @markers[line[2]]
         winner = true
       end
     end
     winner
   end
-  
+
   private
-  
-  # https://medium.com/launch-school/number-validation-with-regex-ruby-393954e46797
+
   def number_string?(str)
-    str = str.to_s unless str.is_a? String
-    /\A[+-]?\d+(\.\d+)?\z/.match(str)
+    str.to_i.to_s == str
   end
 
   def position_free?(position)
-    return if %w[X O].include?(@markers[position.to_i])
+    return false if %w[X O].include?(@markers[position.to_i])
 
     true
   end
 end
-
