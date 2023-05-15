@@ -61,9 +61,9 @@ RSpec.describe Board do
     context 'when first row is 3 of the same marker' do
       it 'returns true' do
         board.markers = ['X', 'X', 'X', 3, 4, 5, 6, 7, 8]
-  
+
         is_winner = board.winner?
-  
+
         expect(is_winner).to eq(true)
       end
     end
@@ -71,9 +71,9 @@ RSpec.describe Board do
     context 'when second row is 3 of the same marker' do
       it 'returns true' do
         board.markers = [0, 1, 2, 'X', 'X', 'X', 6, 7, 8]
-  
+
         is_winner = board.winner?
-  
+
         expect(is_winner).to eq(true)
       end
     end
@@ -81,9 +81,9 @@ RSpec.describe Board do
     context 'when third row is 3 of the same marker' do
       it 'returns true' do
         board.markers = [0, 1, 2, 3, 4, 5, 'O', 'O', 'O']
-  
+
         is_winner = board.winner?
-  
+
         expect(is_winner).to eq(true)
       end
     end
@@ -91,9 +91,9 @@ RSpec.describe Board do
     context 'when first column is 3 of the same marker' do
       it 'returns true' do
         board.markers = ['X', 1, 2, 'X', 4, 5, 'X', 7, 8]
-  
+
         is_winner = board.winner?
-  
+
         expect(is_winner).to eq(true)
       end
     end
@@ -101,9 +101,9 @@ RSpec.describe Board do
     context 'when second column is 3 of the same marker' do
       it 'returns true' do
         board.markers = [0, 'O', 2, 3, 'O', 5, 6, 'O', 8]
-  
+
         is_winner = board.winner?
-  
+
         expect(is_winner).to eq(true)
       end
     end
@@ -111,9 +111,9 @@ RSpec.describe Board do
     context 'when third column is 3 of the same marker' do
       it 'returns true' do
         board.markers = [0, 1, 'X', 3, 4, 'X', 6, 7, 'X']
-  
+
         is_winner = board.winner?
-  
+
         expect(is_winner).to eq(true)
       end
     end
@@ -121,9 +121,9 @@ RSpec.describe Board do
     context 'when first diagonal is 3 of the same marker' do
       it 'returns true' do
         board.markers = ['O', 1, 2, 3, 'O', 5, 6, 7, 'O']
-  
+
         is_winner = board.winner?
-  
+
         expect(is_winner).to eq(true)
       end
     end
@@ -131,9 +131,9 @@ RSpec.describe Board do
     context 'when second diagonal is 3 of the same marker' do
       it 'returns true' do
         board.markers = [0, 1, 'X', 3, 'X', 5, 'X', 7, 8]
-  
+
         is_winner = board.winner?
-  
+
         expect(is_winner).to eq(true)
       end
     end
@@ -141,9 +141,9 @@ RSpec.describe Board do
     context 'when a row is different markers' do
       it 'returns false' do
         board.markers = ['X', 'X', 'O', 3, 4, 5, 6, 7, 8]
-  
+
         is_winner = board.winner?
-  
+
         expect(is_winner).to eq(false)
       end
     end
@@ -151,9 +151,9 @@ RSpec.describe Board do
     context 'when a column is different markers' do
       it 'returns false' do
         board.markers = [0, 'O', 2, 3, 'X', 5, 6, 'O', 8]
-  
+
         is_winner = board.winner?
-  
+
         expect(is_winner).to eq(false)
       end
     end
@@ -161,12 +161,11 @@ RSpec.describe Board do
     context 'when a diagonal is different markers' do
       it 'returns false' do
         board.markers = ['X', 1, 2, 3, 4, 5, 6, 7, 'O']
-  
+
         is_winner = board.winner?
-  
+
         expect(is_winner).to eq(false)
       end
     end
-
   end
 end
