@@ -39,9 +39,15 @@ class Board
     /\A[+-]?\d+(\.\d+)?\z/.match(str)
   end
 
+  def position_free?(position)
+    return if %w[X O].include?(@markers[position.to_i])
+
+    true
+  end
+
   def valid_position?(position)
     return unless number_string?(position) && position.size == 1 &&
-                  !%w[X O].include?(@markers[position.to_i])
+                  position_free?(position)
 
     @markers.include?(position.to_i)
   end
