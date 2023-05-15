@@ -17,10 +17,6 @@ class Board
     [2, 4, 6]
   ].freeze
 
-  def initialize
-    reset
-  end
-
   def reset
     @markers = [0, 1, 2, 3, 4, 5, 6, 7, 8]
   end
@@ -82,5 +78,3 @@ class Player
     self.class.players << self
   end
 end
-
-
