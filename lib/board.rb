@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'pry-byebug'
-
 # Game board class
 class Board
   attr_accessor :markers
@@ -62,21 +60,3 @@ class Board
   end
 end
 
-# Player class
-class Player
-  @players = []
-
-  class << self
-    attr_reader :players
-  end
-
-  attr_accessor :marker
-  attr_reader :name
-
-  def initialize(marker, name)
-    @marker = marker
-    @name = name
-
-    self.class.players << self
-  end
-end

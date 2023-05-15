@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
-require './lib/tic_tac_toe'
+require './lib/player'
+require './lib/board'
 
 # Game class
 class Game
