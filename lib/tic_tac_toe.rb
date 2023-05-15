@@ -28,7 +28,27 @@ class Board
     puts '---+---+---'
     puts " #{@markers[6]} | #{@markers[7]} | #{@markers[8]} "
   end
+  
+  def valid_position?(position)
+    return unless number_string?(position) && position.size == 1 &&
+    position_free?(position)
+    
+    @markers.include?(position.to_i)
+  end
 
+  def winner?
+    winner = false
+    LINES.each do |line|
+      if @markers[line[0]] == @markers[line[1]] &&
+        @markers[line[0]] == @markers[line[2]]
+        winner = true
+      end
+    end
+    winner
+  end
+  
+  private
+  
   # https://medium.com/launch-school/number-validation-with-regex-ruby-393954e46797
   def number_string?(str)
     str = str.to_s unless str.is_a? String
@@ -39,24 +59,6 @@ class Board
     return if %w[X O].include?(@markers[position.to_i])
 
     true
-  end
-
-  def valid_position?(position)
-    return unless number_string?(position) && position.size == 1 &&
-                  position_free?(position)
-
-    @markers.include?(position.to_i)
-  end
-
-  def winner?
-    winner = false
-    LINES.each do |line|
-      if @markers[line[0]] == @markers[line[1]] &&
-         @markers[line[0]] == @markers[line[2]]
-        winner = true
-      end
-    end
-    winner
   end
 end
 
