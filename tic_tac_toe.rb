@@ -60,8 +60,11 @@ end
 
 # Player class
 class Player
-  @@players = []
-  @count = 0
+  @players = []
+
+  class << self
+    attr_reader :players
+  end
 
   attr_accessor :marker
   attr_reader :name
@@ -69,26 +72,8 @@ class Player
   def initialize(marker, name)
     @marker = marker
     @name = name
-    @@players << self
-    self.class.count += 1
-    # p @@players
-  end
 
-  def self.show_players
-    p @@players
-    p @count
-  end
-
-  def self.players
-    @@players
-  end
-
-  class << self
-    attr_reader :count
-  end
-
-  class << self
-    attr_writer :count
+    self.class.players << self
   end
 end
 
