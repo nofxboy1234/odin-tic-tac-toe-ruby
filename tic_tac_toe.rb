@@ -19,7 +19,6 @@ class Board
 
   def initialize
     reset
-    # display_board
   end
 
   def reset
@@ -111,7 +110,6 @@ until play_game == 'n'
     position = gets.chomp.strip
     next unless board.valid_position?(position)
 
-    # puts "You chose position #{position}"
     board.markers[position.to_i] = player.marker
     player = players.next unless board.winner?
   end
