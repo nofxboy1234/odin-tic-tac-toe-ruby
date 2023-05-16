@@ -6,17 +6,17 @@ require './lib/board'
 # Game class
 class Game
   def play
-    board = Board.new
-
-    Player.new('X', 'Player 1')
-    Player.new('O', 'Player 2')
-    players = Player.players.cycle
-
-    player = players.next
-
+    
     play_game = 'y'
     until play_game == 'n'
-      board.reset
+      Player.reset_players
+      Player.new('X', 'Player 1')
+      Player.new('O', 'Player 2')
+      
+      players = Player.players.cycle
+      player = players.next
+      
+      board = Board.new
 
       until board.winner?
         board.display_board
