@@ -11,7 +11,7 @@ RSpec.describe Board do
   subject(:board) { Board.new }
 
   describe '#reset' do
-  # 1. Command Method -> Test the change in the observable state
+    # 1. Command Method -> Test the change in the observable state
     it 'sets @markers to default value' do
       board.reset
 
@@ -20,7 +20,7 @@ RSpec.describe Board do
   end
 
   describe '#valid_position?' do
-  # 2. Query Method -> Test the return value
+    # 2. Query Method -> Test the return value
     context 'when position is valid' do
       it 'returns true' do
         valid_position = '0'
@@ -65,6 +65,7 @@ RSpec.describe Board do
   end
 
   describe '#winner?' do
+    # 2. Query Method -> Test the return value
     context 'when first row is 3 of the same marker' do
       it 'returns true' do
         board.markers = ['X', 'X', 'X', 3, 4, 5, 6, 7, 8]
