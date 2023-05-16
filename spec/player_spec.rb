@@ -8,12 +8,13 @@ require 'pry-byebug'
 # 4. Looping Script Method -> Test the behavior of the method
 
 RSpec.describe Player do
-  
+  before do
+    described_class.instance_variable_set(:@players, [])
+  end
+
   describe '#initialize' do
     context 'when @players is empty' do
       it 'adds self to @players' do
-        described_class.instance_variable_set(:@players, [])
-  
         expect { described_class.new('X', 'Player 1') }
           .to change { described_class.players.size }.from(0).to(1)
       end
@@ -21,9 +22,8 @@ RSpec.describe Player do
 
     context 'when @players is not empty' do
       it 'adds self to @players' do
-        described_class.instance_variable_set(:@players, [])
         described_class.new('X', 'Player 1')
-        
+
         expect { described_class.new('X', 'Player 1') }
           .to change { described_class.players.size }.from(1).to(2)
       end
@@ -34,18 +34,12 @@ RSpec.describe Player do
   describe '.reset_players' do
     context 'when @players is empty' do
       it 'clears the @players array' do
-        described_class.instance_variable_set(:@players, [])
-
         expect { described_class.reset_players }
           .to_not change { described_class.players.size }
       end
     end
 
     context 'when @players is not empty' do
-      before do
-        described_class.instance_variable_set(:@players, [])
-      end
-
       it 'clears the @players array' do
         described_class.new('X', 'Player 1')
 
