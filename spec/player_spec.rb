@@ -13,6 +13,7 @@ RSpec.describe Player do
   end
 
   describe '#initialize' do
+    # 1. Command Method -> Test the change in the observable state
     context 'when @players is empty' do
       it 'adds self to @players' do
         expect { described_class.new('X', 'Player 1') }
@@ -28,14 +29,14 @@ RSpec.describe Player do
           .to change { described_class.players.size }.from(1).to(2)
       end
     end
-
   end
 
   describe '.reset_players' do
+    # 1. Command Method -> Test the change in the observable state
     context 'when @players is empty' do
       it 'clears the @players array' do
         expect { described_class.reset_players }
-          .to_not change { described_class.players.size }
+          .to_not(change { described_class.players.size })
       end
     end
 

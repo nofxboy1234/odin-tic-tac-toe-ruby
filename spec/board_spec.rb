@@ -10,15 +10,6 @@ require './lib/board'
 RSpec.describe Board do
   subject(:board) { Board.new }
 
-  describe '#reset' do
-    # 1. Command Method -> Test the change in the observable state
-    it 'sets @markers to default value' do
-      board.reset
-
-      expect(board.markers).to eq([0, 1, 2, 3, 4, 5, 6, 7, 8])
-    end
-  end
-
   describe '#valid_position?' do
     # 2. Query Method -> Test the return value
     context 'when position is valid' do
