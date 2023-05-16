@@ -21,6 +21,9 @@ RSpec.describe Player do
 
     context 'when @players is not empty' do
       it 'adds self to @players' do
+        described_class.instance_variable_set(:@players, [])
+        described_class.new('X', 'Player 1')
+        
         expect { described_class.new('X', 'Player 1') }
           .to change { described_class.players.size }.from(1).to(2)
       end
@@ -44,7 +47,6 @@ RSpec.describe Player do
       end
 
       it 'clears the @players array' do
-        # binding.pry
         described_class.new('X', 'Player 1')
 
         expect { described_class.reset_players }
