@@ -17,4 +17,8 @@ class Player
 
     self.class.players << self
   end
+
+  def self.reset_players
+    @players = []
+  end
 end
