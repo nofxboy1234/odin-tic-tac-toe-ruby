@@ -7,12 +7,25 @@ require './lib/board'
 class Game
   attr_reader :board, :player
 
-  def initialize
-    new_board
+  # def initialize
+  #   reset_players
+  #   new_board
+  # end
+
+  def reset_players
+    Player.reset_players
+    Player.new('X', 'Player 1')
+    Player.new('O', 'Player 2')
+
+    @player = next_player
   end
-  
+
   def new_board
     @board = Board.new
+  end
+  
+  def players
+    @players ||= Player.players.cycle
   end
 
   def display_board
@@ -31,16 +44,14 @@ class Game
     player.marker
   end
 
+  def next_player
+    players.next
+  end
+
   def play
     play_game = 'y'
     until play_game == 'n'
-      Player.reset_players
-      Player.new('X', 'Player 1')
-      Player.new('O', 'Player 2')
-
-      players = Player.players.cycle
-      @player = players.next
-
+      reset_players
       new_board
 
       until winner?
@@ -50,7 +61,7 @@ class Game
         next unless board.valid_position?(position)
 
         board.markers[position.to_i] = player_marker
-        @player = players.next unless winner?
+        @player = next_player unless winner?
       end
 
       display_board
