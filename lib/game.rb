@@ -23,6 +23,10 @@ class Game
     board.winner?
   end
 
+  def player_input
+    gets.chomp.strip
+  end
+
   def play
     play_game = 'y'
     until play_game == 'n'
@@ -38,7 +42,7 @@ class Game
       until winner?
         display_board
         puts "Please choose a position (0-8) to place your #{player.marker} marker"
-        position = gets.chomp.strip
+        position = player_input
         next unless board.valid_position?(position)
 
         board.markers[position.to_i] = player.marker
@@ -49,7 +53,7 @@ class Game
       puts "\n#{player.name} (#{player.marker}) wins!"
 
       puts "\nPlay again? (y/n)"
-      play_game = gets.chomp.strip
+      play_game = player_input
     end
   end
 end
