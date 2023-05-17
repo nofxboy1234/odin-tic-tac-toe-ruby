@@ -5,7 +5,7 @@ require './lib/board'
 
 # Game class
 class Game
-  attr_reader :board
+  attr_reader :board, :player
 
   def initialize
     new_board
@@ -27,6 +27,10 @@ class Game
     gets.chomp.strip
   end
 
+  def player_marker
+    player.marker
+  end
+
   def play
     play_game = 'y'
     until play_game == 'n'
@@ -35,22 +39,22 @@ class Game
       Player.new('O', 'Player 2')
 
       players = Player.players.cycle
-      player = players.next
+      @player = players.next
 
       new_board
 
       until winner?
         display_board
-        puts "Please choose a position (0-8) to place your #{player.marker} marker"
+        puts "Please choose a position (0-8) to place your #{player_marker} marker"
         position = player_input
         next unless board.valid_position?(position)
 
-        board.markers[position.to_i] = player.marker
-        player = players.next unless winner?
+        board.markers[position.to_i] = player_marker
+        @player = players.next unless winner?
       end
 
       display_board
-      puts "\n#{player.name} (#{player.marker}) wins!"
+      puts "\n#{player.name} (#{player_marker}) wins!"
 
       puts "\nPlay again? (y/n)"
       play_game = player_input
