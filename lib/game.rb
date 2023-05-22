@@ -33,7 +33,7 @@ class Game
     else
       puts 'The game is tied!'
     end
-    
+
     puts "\nPlay again? (y/n)"
     player_input
   end
