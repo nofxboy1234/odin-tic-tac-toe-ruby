@@ -28,10 +28,10 @@ RSpec.describe Game do
 
       allow(game).to receive(:next_player)
       allow(game).to receive(:display_board)
-      
+
       allow(game.board).to receive(:valid_position?).and_return(true)
       allow(game).to receive(:input_position)
-      
+
       allow(game).to receive(:player_marker)
     end
 
@@ -52,5 +52,50 @@ RSpec.describe Game do
         game.game_loop
       end
     end
+  end
+
+  describe '#show_win_screen' do
+    let(:player) { double('player', name: 'Player 1') }
+
+    it 'displays the winner and asks the user if they want to play again' do
+
+      allow(game).to receive(:display_board)
+      allow(game).to receive(:player_marker)
+      allow(game).to receive(:player).and_return(player)
+      allow(game.player).to receive(:name)
+      allow(game).to receive(:puts)
+
+      expect(game).to receive(:player_input).once
+      game.show_win_screen
+    end
+  end
+
+  describe '#play' do
+    context 'when user enters "n"' do
+      it 'sets up the game and runs the game loop then finishes loop' do
+        allow(game).to receive(:reset_players)
+        allow(game).to receive(:new_board)
+        allow(game).to receive(:game_loop)
+        allow(game).to receive(:show_win_screen).and_return('n')
+  
+        expect(game).to receive(:game_loop).once
+  
+        game.play
+      end
+    end
+
+    context 'when user enters "y", then "n"' do
+      it 'sets up the game and runs the game loop twice then finishes loop' do
+        allow(game).to receive(:reset_players)
+        allow(game).to receive(:new_board)
+        allow(game).to receive(:game_loop)
+        allow(game).to receive(:show_win_screen).and_return('y', 'n')
+  
+        expect(game).to receive(:game_loop).exactly(2).times
+  
+        game.play
+      end
+    end
+
   end
 end
