@@ -16,13 +16,13 @@ class Game
 
   def game_loop
     until winner?
+      @player = next_player
       display_board
 
       position = input_position
       next unless board.valid_position?(position)
 
       board.update_marker(position.to_i, player_marker)
-      @player = next_player unless winner?
     end
   end
 
@@ -77,10 +77,9 @@ class Game
   end
 
   def reset_players
+    @players = nil
     Player.reset_players
     Player.new('X', 'Player 1')
     Player.new('O', 'Player 2')
-
-    @player = next_player
   end
 end
