@@ -26,6 +26,13 @@ class Game
     end
   end
 
+  def show_win_screen
+    display_board
+    puts "\n#{player.name} (#{player_marker}) wins!"
+    puts "\nPlay again? (y/n)"
+    player_input
+  end
+
   def play
     play_game = 'y'
     until play_game == 'n'
@@ -34,11 +41,7 @@ class Game
 
       game_loop
 
-      display_board
-      puts "\n#{player.name} (#{player_marker}) wins!"
-
-      puts "\nPlay again? (y/n)"
-      play_game = player_input
+      play_game = show_win_screen
     end
   end
 
