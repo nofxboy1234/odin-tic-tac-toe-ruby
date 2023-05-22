@@ -9,14 +9,6 @@ require 'pry-byebug'
 class Game
   attr_reader :board, :player
 
-  def reset_players
-    Player.reset_players
-    Player.new('X', 'Player 1')
-    Player.new('O', 'Player 2')
-
-    @player = next_player
-  end
-
   def play
     play_game = 'y'
     until play_game == 'n'
@@ -70,5 +62,13 @@ class Game
   def next_player
     # binding.pry
     players.next
+  end
+
+  def reset_players
+    Player.reset_players
+    Player.new('X', 'Player 1')
+    Player.new('O', 'Player 2')
+
+    @player = next_player
   end
 end
