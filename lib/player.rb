@@ -20,7 +20,7 @@ class Player
   end
 
   def self.reset_players
-    binding.pry
+    # binding.pry
     @players = []
   end
 end
