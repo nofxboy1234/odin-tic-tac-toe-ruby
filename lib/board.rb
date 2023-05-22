@@ -37,9 +37,10 @@ class Board
   def winner?
     winner = false
     LINES.each do |line|
-      line_zero = line[0]
-      if markers[line_zero] == markers[line[1]] &&
-         markers[line_zero] == markers[line[2]]
+      line_zero = markers[line[0]]
+      
+      if line_zero == markers[line[1]] &&
+         line_zero == markers[line[2]]
         winner = true
       end
     end
