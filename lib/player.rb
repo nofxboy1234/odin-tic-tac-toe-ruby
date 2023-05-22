@@ -8,8 +8,7 @@ class Player
     attr_reader :players
   end
 
-  attr_reader :marker
-  attr_reader :name
+  attr_reader :marker, :name
 
   def initialize(marker, name)
     # binding.pry
