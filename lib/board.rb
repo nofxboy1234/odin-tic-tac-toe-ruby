@@ -22,23 +22,23 @@ class Board
   end
 
   def display_board
-    puts " #{@markers[0]} | #{@markers[1]} | #{@markers[2]} "
+    puts " #{markers[0]} | #{markers[1]} | #{markers[2]} "
     print_row_separator
-    puts " #{@markers[3]} | #{@markers[4]} | #{@markers[5]} "
+    puts " #{markers[3]} | #{markers[4]} | #{markers[5]} "
     print_row_separator
-    puts " #{@markers[6]} | #{@markers[7]} | #{@markers[8]} "
+    puts " #{markers[6]} | #{markers[7]} | #{markers[8]} "
   end
 
   def valid_position?(position)
-    number_string?(position) && @markers.include?(position.to_i) &&
+    number_string?(position) && markers.include?(position.to_i) &&
       position_free?(position)
   end
 
   def winner?
     winner = false
     LINES.each do |line|
-      if @markers[line[0]] == @markers[line[1]] &&
-         @markers[line[0]] == @markers[line[2]]
+      if markers[line[0]] == markers[line[1]] &&
+         markers[line[0]] == markers[line[2]]
         winner = true
       end
     end
@@ -56,7 +56,7 @@ class Board
   end
 
   def position_free?(position)
-    return false if %w[X O].include?(@markers[position.to_i])
+    return false if %w[X O].include?(markers[position.to_i])
 
     true
   end
