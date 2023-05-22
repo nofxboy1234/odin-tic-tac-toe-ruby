@@ -19,8 +19,8 @@ class Game
       @player = next_player
       display_board
 
-      position = input_position
-      next unless board.valid_position?(position)
+      position = input_position until board.valid_position?(position)
+      # next unless board.valid_position?(position)
 
       board.update_marker(position.to_i, player_marker)
     end
