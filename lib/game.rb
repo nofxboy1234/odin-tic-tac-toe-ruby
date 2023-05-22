@@ -30,11 +30,11 @@ class Game
 
     if board.winner?
       puts "\n#{player.name} (#{player_marker}) wins!"
-      puts "\nPlay again? (y/n)"
     else
       puts 'The game is tied!'
     end
-
+    
+    puts "\nPlay again? (y/n)"
     player_input
   end
 
