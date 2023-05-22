@@ -4,7 +4,7 @@ require 'pry-byebug'
 
 # Game board class
 class Board
-  attr_accessor :markers
+  attr_reader :markers
 
   LINES = [
     [0, 1, 2],
