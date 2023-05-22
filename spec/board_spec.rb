@@ -44,7 +44,8 @@ RSpec.describe Board do
 
     context 'when position is taken by another marker' do
       it 'returns false' do
-        board.markers = ['X', 1, 2, 3, 4, 5, 6, 7, 8]
+        markers = ['X', 1, 2, 3, 4, 5, 6, 7, 8]
+        board.instance_variable_set(:@markers, markers)
 
         invalid_position = '0'
 
@@ -59,7 +60,8 @@ RSpec.describe Board do
     # 2. Query Method -> Test the return value
     context 'when first row is 3 of the same marker' do
       it 'returns true' do
-        board.markers = ['X', 'X', 'X', 3, 4, 5, 6, 7, 8]
+        markers = ['X', 'X', 'X', 3, 4, 5, 6, 7, 8]
+        board.instance_variable_set(:@markers, markers)
 
         is_winner = board.winner?
 
@@ -69,7 +71,8 @@ RSpec.describe Board do
 
     context 'when second row is 3 of the same marker' do
       it 'returns true' do
-        board.markers = [0, 1, 2, 'X', 'X', 'X', 6, 7, 8]
+        markers = [0, 1, 2, 'X', 'X', 'X', 6, 7, 8]
+        board.instance_variable_set(:@markers, markers)
 
         is_winner = board.winner?
 
@@ -79,7 +82,8 @@ RSpec.describe Board do
 
     context 'when third row is 3 of the same marker' do
       it 'returns true' do
-        board.markers = [0, 1, 2, 3, 4, 5, 'O', 'O', 'O']
+        markers = [0, 1, 2, 3, 4, 5, 'O', 'O', 'O']
+        board.instance_variable_set(:@markers, markers)
 
         is_winner = board.winner?
 
@@ -89,7 +93,8 @@ RSpec.describe Board do
 
     context 'when first column is 3 of the same marker' do
       it 'returns true' do
-        board.markers = ['X', 1, 2, 'X', 4, 5, 'X', 7, 8]
+        markers = ['X', 1, 2, 'X', 4, 5, 'X', 7, 8]
+        board.instance_variable_set(:@markers, markers)
 
         is_winner = board.winner?
 
@@ -99,7 +104,8 @@ RSpec.describe Board do
 
     context 'when second column is 3 of the same marker' do
       it 'returns true' do
-        board.markers = [0, 'O', 2, 3, 'O', 5, 6, 'O', 8]
+        markers = [0, 'O', 2, 3, 'O', 5, 6, 'O', 8]
+        board.instance_variable_set(:@markers, markers)
 
         is_winner = board.winner?
 
@@ -109,7 +115,8 @@ RSpec.describe Board do
 
     context 'when third column is 3 of the same marker' do
       it 'returns true' do
-        board.markers = [0, 1, 'X', 3, 4, 'X', 6, 7, 'X']
+        markers = [0, 1, 'X', 3, 4, 'X', 6, 7, 'X']
+        board.instance_variable_set(:@markers, markers)
 
         is_winner = board.winner?
 
@@ -119,7 +126,8 @@ RSpec.describe Board do
 
     context 'when first diagonal is 3 of the same marker' do
       it 'returns true' do
-        board.markers = ['O', 1, 2, 3, 'O', 5, 6, 7, 'O']
+        markers = ['O', 1, 2, 3, 'O', 5, 6, 7, 'O']
+        board.instance_variable_set(:@markers, markers)
 
         is_winner = board.winner?
 
@@ -129,7 +137,8 @@ RSpec.describe Board do
 
     context 'when second diagonal is 3 of the same marker' do
       it 'returns true' do
-        board.markers = [0, 1, 'X', 3, 'X', 5, 'X', 7, 8]
+        markers = [0, 1, 'X', 3, 'X', 5, 'X', 7, 8]
+        board.instance_variable_set(:@markers, markers)
 
         is_winner = board.winner?
 
@@ -139,7 +148,8 @@ RSpec.describe Board do
 
     context 'when a row is different markers' do
       it 'returns false' do
-        board.markers = ['X', 'X', 'O', 3, 4, 5, 6, 7, 8]
+        markers = ['X', 'X', 'O', 3, 4, 5, 6, 7, 8]
+        board.instance_variable_set(:@markers, markers)
 
         is_winner = board.winner?
 
@@ -149,7 +159,8 @@ RSpec.describe Board do
 
     context 'when a column is different markers' do
       it 'returns false' do
-        board.markers = [0, 'O', 2, 3, 'X', 5, 6, 'O', 8]
+        markers = [0, 'O', 2, 3, 'X', 5, 6, 'O', 8]
+        board.instance_variable_set(:@markers, markers)
 
         is_winner = board.winner?
 
@@ -159,7 +170,8 @@ RSpec.describe Board do
 
     context 'when a diagonal is different markers' do
       it 'returns false' do
-        board.markers = ['X', 1, 2, 3, 4, 5, 6, 7, 'O']
+        markers = ['X', 1, 2, 3, 4, 5, 6, 7, 'O']
+        board.instance_variable_set(:@markers, markers)
 
         is_winner = board.winner?
 
