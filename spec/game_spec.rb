@@ -16,7 +16,7 @@ RSpec.describe Game do
       allow(game).to receive(:player_marker).and_return('X')
       allow(game).to receive(:puts)
 
-      expect(game).to receive(:player_input)
+      expect(game).to receive(:player_input).once
 
       game.input_position
     end
