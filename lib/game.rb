@@ -11,9 +11,9 @@ class Game
 
   def input_position
     puts "Please choose a position (0-8) to place your #{player_marker} marker"
-    position = player_input
+    player_input
   end
-  
+
   def game_loop
     until winner?
       display_board
