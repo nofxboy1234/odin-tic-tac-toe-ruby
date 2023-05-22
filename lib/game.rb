@@ -9,21 +9,30 @@ require 'pry-byebug'
 class Game
   attr_reader :board, :player
 
+  def input_position
+    puts "Please choose a position (0-8) to place your #{player_marker} marker"
+    position = player_input
+  end
+  
+  def game_loop
+    until winner?
+      display_board
+
+      position = input_position
+      next unless board.valid_position?(position)
+
+      board.markers[position.to_i] = player_marker
+      @player = next_player unless winner?
+    end
+  end
+
   def play
     play_game = 'y'
     until play_game == 'n'
       reset_players
       new_board
 
-      until winner?
-        display_board
-        puts "Please choose a position (0-8) to place your #{player_marker} marker"
-        position = player_input
-        next unless board.valid_position?(position)
-
-        board.markers[position.to_i] = player_marker
-        @player = next_player unless winner?
-      end
+      game_loop
 
       display_board
       puts "\n#{player.name} (#{player_marker}) wins!"
