@@ -71,7 +71,6 @@ class Game
   end
 
   def next_player
-    # binding.pry
     players.next
   end
 

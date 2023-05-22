@@ -13,8 +13,8 @@ RSpec.describe Game do
 
   describe '#input_position' do
     it 'gets input from player' do
-      allow(game).to receive(:puts)
       allow(game).to receive(:player_marker).and_return('X')
+      allow(game).to receive(:puts)
 
       expect(game).to receive(:player_input)
 
@@ -26,38 +26,29 @@ RSpec.describe Game do
     before do
       game.instance_variable_set(:@board, Board.new)
 
+      allow(game).to receive(:next_player)
       allow(game).to receive(:display_board)
-
-      allow(game).to receive(:input_position)
+      
       allow(game.board).to receive(:valid_position?).and_return(true)
-
+      allow(game).to receive(:input_position)
+      
       allow(game).to receive(:player_marker)
-      allow(game.board).to receive(:update_marker)      
     end
 
-    context 'when there is a winner on the first iteration' do
-      it 'does not send next_player message and finishes the loop' do
+    context 'when there is a winner after player inputs position' do
+      it 'sends update_marker to game.board once' do
         allow(game).to receive(:winner?).and_return(false, true)
 
-        expect(game).not_to receive(:next_player)
+        expect(game.board).to receive(:update_marker).once
         game.game_loop
       end
     end
 
-    context 'when there is not a winner once, and then there is a winner' do
-      it 'sends next_player message once and finishes the loop' do
+    context 'when there is a winner after position is entered twice' do
+      it 'sends update_marker to game.board twice' do
         allow(game).to receive(:winner?).and_return(false, false, true)
 
-        expect(game).to receive(:next_player).once
-        game.game_loop
-      end
-    end
-
-    context 'when there is not a winner twice, and then there is a winner' do
-      it 'sends next_player message once and finishes the loop' do
-        allow(game).to receive(:winner?).and_return(false, false, false, false, true)
-
-        expect(game).to receive(:next_player).twice
+        expect(game.board).to receive(:update_marker).twice
         game.game_loop
       end
     end
