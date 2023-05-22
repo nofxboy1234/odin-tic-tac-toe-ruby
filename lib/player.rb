@@ -8,7 +8,7 @@ class Player
     attr_reader :players
   end
 
-  attr_accessor :marker
+  attr_reader :marker
   attr_reader :name
 
   def initialize(marker, name)

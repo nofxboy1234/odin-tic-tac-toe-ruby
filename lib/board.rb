@@ -42,7 +42,7 @@ class Board
     winner = false
     LINES.each do |line|
       line_zero = markers[line[0]]
-      
+
       if line_zero == markers[line[1]] &&
          line_zero == markers[line[2]]
         winner = true
