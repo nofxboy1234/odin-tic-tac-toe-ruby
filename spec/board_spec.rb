@@ -8,7 +8,7 @@ require './lib/board'
 # 4. Looping Script Method -> Test the behavior of the method
 
 RSpec.describe Board do
-  subject(:board) { Board.new }
+  subject(:board) { described_class.new }
 
   describe '#update_marker' do
     it 'updates the markers array' do
@@ -187,6 +187,26 @@ RSpec.describe Board do
         is_winner = board.winner?
 
         expect(is_winner).to eq(false)
+      end
+    end
+  end
+
+  describe '#full?' do
+    context 'when the board is filled with markers' do
+      it 'returns true' do
+        markers = ['X', 'O', 'X', 'X', 'X', 'O', 'O', 'O', 'O']
+        board.instance_variable_set(:@markers, markers)
+        
+        expect(board).to be_full
+      end
+    end
+
+    context 'when the board is not filled with markers' do
+      it 'returns false' do
+        markers = ['X', 'O', 'X', 'X', 'X', 'O', 'O', 'O', 8]
+        board.instance_variable_set(:@markers, markers)
+        
+        expect(board).not_to be_full
       end
     end
   end

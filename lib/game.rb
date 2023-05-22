@@ -15,7 +15,7 @@ class Game
   end
 
   def game_loop
-    until winner?
+    until winner? || board.full?
       @player = next_player
       display_board
 
@@ -27,8 +27,14 @@ class Game
 
   def show_win_screen
     display_board
-    puts "\n#{player.name} (#{player_marker}) wins!"
-    puts "\nPlay again? (y/n)"
+
+    if board.winner?
+      puts "\n#{player.name} (#{player_marker}) wins!"
+      puts "\nPlay again? (y/n)"
+    else
+      puts 'The game is tied!'
+    end
+    
     player_input
   end
 

@@ -51,6 +51,12 @@ class Board
     winner
   end
 
+  def full?
+    markers.all? do |element|
+      element == 'X' || element == 'O'
+    end
+  end
+
   private
 
   def print_row_separator
