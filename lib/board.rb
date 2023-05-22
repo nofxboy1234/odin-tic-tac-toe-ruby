@@ -23,9 +23,9 @@ class Board
 
   def display_board
     puts " #{@markers[0]} | #{@markers[1]} | #{@markers[2]} "
-    puts '---+---+---'
+    print_row_separator
     puts " #{@markers[3]} | #{@markers[4]} | #{@markers[5]} "
-    puts '---+---+---'
+    print_row_separator
     puts " #{@markers[6]} | #{@markers[7]} | #{@markers[8]} "
   end
 
@@ -46,6 +46,10 @@ class Board
   end
 
   private
+
+  def print_row_separator
+    puts '---+---+---'
+  end
 
   def number_string?(str)
     str.to_i.to_s == str
