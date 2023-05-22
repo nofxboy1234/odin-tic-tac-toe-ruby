@@ -3,14 +3,11 @@
 require './lib/player'
 require './lib/board'
 
+require 'pry-byebug'
+
 # Game class
 class Game
   attr_reader :board, :player
-
-  # def initialize
-  #   reset_players
-  #   new_board
-  # end
 
   def reset_players
     Player.reset_players
@@ -18,34 +15,6 @@ class Game
     Player.new('O', 'Player 2')
 
     @player = next_player
-  end
-
-  def new_board
-    @board = Board.new
-  end
-  
-  def players
-    @players ||= Player.players.cycle
-  end
-
-  def display_board
-    board.display_board
-  end
-
-  def winner?
-    board.winner?
-  end
-
-  def player_input
-    gets.chomp.strip
-  end
-
-  def player_marker
-    player.marker
-  end
-
-  def next_player
-    players.next
   end
 
   def play
@@ -70,5 +39,36 @@ class Game
       puts "\nPlay again? (y/n)"
       play_game = player_input
     end
+  end
+
+  private
+
+  def new_board
+    @board = Board.new
+  end
+
+  def players
+    @players ||= Player.players.cycle
+  end
+
+  def display_board
+    board.display_board
+  end
+
+  def winner?
+    board.winner?
+  end
+
+  def player_input
+    gets.chomp.strip
+  end
+
+  def player_marker
+    player.marker
+  end
+
+  def next_player
+    # binding.pry
+    players.next
   end
 end

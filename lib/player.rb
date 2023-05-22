@@ -12,6 +12,7 @@ class Player
   attr_reader :name
 
   def initialize(marker, name)
+    # binding.pry
     @marker = marker
     @name = name
 
@@ -19,6 +20,7 @@ class Player
   end
 
   def self.reset_players
+    binding.pry
     @players = []
   end
 end
