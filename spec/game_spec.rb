@@ -11,19 +11,55 @@ require 'pry-byebug'
 RSpec.describe Game do
   subject(:game) { Game.new }
 
-  # describe '#play' do
-  #   context 'when Player.players is empty' do
-  #     it 'sets the first player to Player 1' do
-  #       allow(Player).to receive(:reset_players)
-  #       Player.players.clear
+  describe '#input_position' do
+    it 'gets input from player' do
+      allow(game).to receive(:puts)
+      allow(game).to receive(:player_marker).and_return('X')
 
-  #       game.reset_players
+      expect(game).to receive(:player_input)
 
-  #       name = game.player.name
-  #       expect(name).to eq('Player 1')
-  #     end
-  #   end
-  # end
+      game.input_position
+    end
+  end
 
+  describe '#game_loop' do
+    before do
+      game.instance_variable_set(:@board, Board.new)
 
+      allow(game).to receive(:display_board)
+
+      allow(game).to receive(:input_position)
+      allow(game.board).to receive(:valid_position?).and_return(true)
+
+      allow(game).to receive(:player_marker)
+      allow(game.board).to receive(:update_marker)      
+    end
+
+    context 'when there is a winner on the first iteration' do
+      it 'does not send next_player message and finishes the loop' do
+        allow(game).to receive(:winner?).and_return(false, true)
+
+        expect(game).not_to receive(:next_player)
+        game.game_loop
+      end
+    end
+
+    context 'when there is not a winner once, and then there is a winner' do
+      it 'sends next_player message once and finishes the loop' do
+        allow(game).to receive(:winner?).and_return(false, false, true)
+
+        expect(game).to receive(:next_player).once
+        game.game_loop
+      end
+    end
+
+    context 'when there is not a winner twice, and then there is a winner' do
+      it 'sends next_player message once and finishes the loop' do
+        allow(game).to receive(:winner?).and_return(false, false, false, false, true)
+
+        expect(game).to receive(:next_player).twice
+        game.game_loop
+      end
+    end
+  end
 end
