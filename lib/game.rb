@@ -34,7 +34,7 @@ class Game
     else
       puts 'The game is tied!'
     end
-    
+
     player_input
   end
 

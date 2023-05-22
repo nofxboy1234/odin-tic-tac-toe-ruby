@@ -53,7 +53,7 @@ class Board
 
   def full?
     markers.all? do |element|
-      element == 'X' || element == 'O'
+      %w[X O].include?(element)
     end
   end
 
