@@ -10,6 +10,17 @@ require './lib/board'
 RSpec.describe Board do
   subject(:board) { Board.new }
 
+  describe '#update_marker' do
+    it 'updates the markers array' do
+      position = 0
+      marker = 'X'
+      
+      board.update_marker(position, marker)
+
+      expect(board.markers[0]).to eq('X')
+    end
+  end
+
   describe '#valid_position?' do
     # 2. Query Method -> Test the return value
     context 'when position is valid' do

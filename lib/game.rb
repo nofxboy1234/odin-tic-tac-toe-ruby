@@ -22,7 +22,6 @@ class Game
       next unless board.valid_position?(position)
 
       board.update_marker(position.to_i, player_marker)
-      # board.markers[position.to_i] = player_marker
       @player = next_player unless winner?
     end
   end
