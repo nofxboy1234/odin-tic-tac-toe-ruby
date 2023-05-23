@@ -13,3 +13,8 @@ and Reek to check for code smells.
 ruby lib/main.rb
 ```
 
+## Running the tests
+
+```ruby
+rspec spec
+```
