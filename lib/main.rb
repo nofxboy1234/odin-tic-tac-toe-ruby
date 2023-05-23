@@ -2,6 +2,4 @@
 
 require './lib/game'
 
-require 'pry-byebug'
-
 Game.new.play

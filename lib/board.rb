@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'pry-byebug'
-
 # Game board class
 class Board
   attr_reader :markers

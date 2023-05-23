@@ -1,7 +1,4 @@
 require './lib/game'
-# require './lib/player'
-
-require 'pry-byebug'
 
 # 1. Command Method -> Test the change in the observable state
 # 2. Query Method -> Test the return value
