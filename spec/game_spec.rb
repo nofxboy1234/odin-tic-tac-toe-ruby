@@ -17,15 +17,45 @@ RSpec.describe Game do
     context 'when player inputs a valid position the first time' do
       before do
         game.instance_variable_set(:@board, board)
-        
+
         allow(board).to receive(:valid_position?).and_return(false, true)
         allow(game).to receive(:player_marker)
         allow(game).to receive(:puts)
         allow(game).to receive(:player_input).once
       end
-      
+
       it 'sends valid_position message to board twice (initial check and after player inputs once)' do
         expect(board).to receive(:valid_position?).twice
+        game.input_position
+      end
+    end
+
+    context 'when board.valid_position? is false once' do
+      before do
+        game.instance_variable_set(:@board, board)
+
+        allow(board).to receive(:valid_position?).and_return(false, true)
+        allow(game).to receive(:player_marker)
+        allow(game).to receive(:puts)
+      end
+      
+      it 'calls player_input once' do
+        expect(game).to receive(:player_input).once
+        game.input_position
+      end
+    end
+
+    context 'when board.valid_position? is false twice' do
+      before do
+        game.instance_variable_set(:@board, board)
+
+        allow(board).to receive(:valid_position?).and_return(false, false, true)
+        allow(game).to receive(:player_marker)
+        allow(game).to receive(:puts)
+      end
+      
+      it 'calls player_input twice' do
+        expect(game).to receive(:player_input).twice
         game.input_position
       end
     end
