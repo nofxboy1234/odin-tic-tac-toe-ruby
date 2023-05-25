@@ -20,7 +20,9 @@ RSpec.describe Game do
         game.next_player
         game.instance_variable_set(:@board, board)
         
-        allow(game).to receive(:player_input).and_return('8').once
+        allow(board).to receive(:valid_position?).and_return(false, true)
+        allow(game).to receive(:puts)
+        allow(game).to receive(:player_input).once
       end
       
       it 'sends valid_position message to board twice (initial check and after player inputs once)' do
