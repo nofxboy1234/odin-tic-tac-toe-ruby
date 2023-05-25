@@ -34,6 +34,22 @@ RSpec.describe Game do
         game.game_loop
       end
     end
+
+    context 'when game_over? is false twice' do
+      before do
+        game.reset_players
+        game.instance_variable_set(:@board, board)
+  
+        allow(game).to receive(:game_over?).and_return(false, false, true)
+        allow(game).to receive(:display_board)
+        allow(game).to receive(:input_position)
+      end
+      
+      it 'calls board.update_marker twice' do
+        expect(board).to receive(:update_marker).twice
+        game.game_loop
+      end
+    end
   end
 
   describe '#show_win_screen' do
