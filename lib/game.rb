@@ -29,6 +29,11 @@ class Game
     end
   end
 
+  def promp_to_play_again
+    puts "\nPlay again? (y/n)"
+    player_input
+  end
+
   def show_win_screen
     display_board
 
@@ -37,20 +42,18 @@ class Game
     else
       puts 'The game is tied!'
     end
-
-    puts "\nPlay again? (y/n)"
-    player_input
   end
-
+  
   def play
     play_game = 'y'
     until play_game == 'n'
       reset_players
       new_board
-
+      
       game_loop
-
-      play_game = show_win_screen
+      
+      show_win_screen
+      play_game = promp_to_play_again
     end
   end
 
