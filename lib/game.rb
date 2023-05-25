@@ -14,7 +14,7 @@ class Game
 
   def game_loop
     until winner? || board.full?
-      @player = next_player
+      next_player
       display_board
 
       position = input_position until board.valid_position?(position)
@@ -49,13 +49,21 @@ class Game
   end
 
   def next_player
-    players.next
+    @player = players.next
   end
 
   def display_board
     board.display_board
   end
   
+  def player_marker
+    player.marker
+  end
+
+  def game_over?
+    winner? || board.full?
+  end
+
   private
 
   def new_board
@@ -66,7 +74,6 @@ class Game
     @players ||= Player.players.cycle
   end
 
-
   def winner?
     board.winner?
   end
@@ -74,11 +81,6 @@ class Game
   def player_input
     gets.chomp.strip
   end
-
-  def player_marker
-    player.marker
-  end
-
 
   def reset_players
     @players = nil
