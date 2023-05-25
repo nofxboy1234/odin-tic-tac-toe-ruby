@@ -136,28 +136,32 @@ RSpec.describe Game do
   end
 
   describe '#play' do
-    context 'when user enters "n"' do
-      it 'sets up the game and runs the game loop then finishes loop' do
-        allow(game).to receive(:reset_players)
-        allow(game).to receive(:new_board)
+    # 4. Looping Script Method -> Test the behavior of the method
+
+    context 'when user enters "y" once' do
+      before do
+        allow(game).to receive(:set_up)
         allow(game).to receive(:game_loop)
-        allow(game).to receive(:show_win_screen).and_return('n')
+        allow(game).to receive(:show_win_screen)
+        allow(game).to receive(:prompt_to_play_again).and_return('y', 'n')
+      end
 
-        expect(game).to receive(:game_loop).once
-
+      it 'completes loop twice and prompts to play again twice' do
+        expect(game).to receive(:prompt_to_play_again).twice
         game.play
       end
     end
 
-    context 'when user enters "y", then "n"' do
-      it 'sets up the game and runs the game loop twice then finishes loop' do
-        allow(game).to receive(:reset_players)
-        allow(game).to receive(:new_board)
+    context 'when user enters "y" twice' do
+      before do
+        allow(game).to receive(:set_up)
         allow(game).to receive(:game_loop)
-        allow(game).to receive(:show_win_screen).and_return('y', 'n')
+        allow(game).to receive(:show_win_screen)
+        allow(game).to receive(:prompt_to_play_again).and_return('y', 'y', 'n')
+      end
 
-        expect(game).to receive(:game_loop).exactly(2).times
-
+      it 'completes loop three times and prompts to play again three times' do
+        expect(game).to receive(:prompt_to_play_again).exactly(3).times
         game.play
       end
     end

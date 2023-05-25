@@ -45,7 +45,7 @@ class Game
       game_loop
 
       show_win_screen
-      play_game = promp_to_play_again
+      play_game = prompt_to_play_again
     end
   end
 
@@ -76,7 +76,7 @@ class Game
     @board = Board.new
   end
 
-  def promp_to_play_again
+  def prompt_to_play_again
     puts "\nPlay again? (y/n)"
     player_input
   end
