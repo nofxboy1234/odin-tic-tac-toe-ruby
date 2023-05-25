@@ -10,8 +10,6 @@ class Game
   attr_reader :board, :player
 
   def input_position
-    # binding.pry
-
     position = '-1'
     until board.valid_position?(position)
       puts "Please choose a position (0-8) to place your #{player_marker} marker"
@@ -29,11 +27,6 @@ class Game
     end
   end
 
-  def promp_to_play_again
-    puts "\nPlay again? (y/n)"
-    player_input
-  end
-
   def show_win_screen
     display_board
 
@@ -43,15 +36,14 @@ class Game
       puts 'The game is tied!'
     end
   end
-  
+
   def play
     play_game = 'y'
     until play_game == 'n'
-      reset_players
-      new_board
-      
+      set_up
+
       game_loop
-      
+
       show_win_screen
       play_game = promp_to_play_again
     end
@@ -64,7 +56,7 @@ class Game
   def display_board
     board.display_board
   end
-  
+
   def player_marker
     player.marker
   end
@@ -84,6 +76,16 @@ class Game
     @board = Board.new
   end
 
+  def promp_to_play_again
+    puts "\nPlay again? (y/n)"
+    player_input
+  end
+
+  def set_up
+    reset_players
+    new_board
+  end
+
   private
 
   def players
@@ -97,6 +99,4 @@ class Game
   def player_input
     gets.chomp.strip
   end
-
-
 end
