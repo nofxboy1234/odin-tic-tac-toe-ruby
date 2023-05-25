@@ -11,6 +11,8 @@ RSpec.describe Board do
   subject(:board) { described_class.new }
 
   describe '#update_marker' do
+    # 1. Command Method -> Test the change in the observable state
+
     it 'updates the markers array' do
       position = 0
       marker = 'X'
@@ -192,6 +194,8 @@ RSpec.describe Board do
   end
 
   describe '#full?' do
+    # 2. Query Method -> Test the return value
+
     context 'when the board is filled with markers' do
       it 'returns true' do
         markers = ['X', 'O', 'X', 'X', 'X', 'O', 'O', 'O', 'O']
