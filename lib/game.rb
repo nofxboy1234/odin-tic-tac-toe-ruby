@@ -3,11 +3,15 @@
 require './lib/player'
 require './lib/board'
 
+require 'pry-byebug'
+
 # Game class
 class Game
   attr_reader :board, :player
 
   def input_position
+    # binding.pry
+
     position = '-1'
     until board.valid_position?(position)
       puts "Please choose a position (0-8) to place your #{player_marker} marker"

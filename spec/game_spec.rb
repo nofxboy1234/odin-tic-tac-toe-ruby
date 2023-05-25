@@ -10,7 +10,24 @@ RSpec.describe Game do
   subject(:game) { Game.new }
 
   describe '#input_position' do
-    # Only calls puts. No test needed
+    # 3. Method with Outgoing Command -> Test that a message is sent
+    # 4. Looping Script Method -> Test the behavior of the method
+    # 2. Query Method -> Test the return value
+
+    context 'when player inputs a valid position the first time' do
+      before do
+        game.reset_players
+        game.next_player
+        game.instance_variable_set(:@board, board)
+        
+        allow(board).to receive(:valid_position?).and_return(false, true)
+      end
+
+      it 'sends valid_position message to board twice (initial check and after player inputs once)' do
+        expect(game).to receive(:player_input).and_return('8').once
+        game.input_position
+      end
+    end
   end
 
   describe '#game_loop' do
