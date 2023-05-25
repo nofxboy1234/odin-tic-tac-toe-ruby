@@ -16,11 +16,10 @@ RSpec.describe Game do
 
     context 'when player inputs a valid position the first time' do
       before do
-        game.reset_players
-        game.next_player
         game.instance_variable_set(:@board, board)
         
         allow(board).to receive(:valid_position?).and_return(false, true)
+        allow(game).to receive(:player_marker)
         allow(game).to receive(:puts)
         allow(game).to receive(:player_input).once
       end
