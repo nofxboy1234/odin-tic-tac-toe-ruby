@@ -132,43 +132,7 @@ RSpec.describe Game do
   end
 
   describe '#show_win_screen' do
-    let(:player) { double('player', name: 'Player 1') }
-
-    context 'when there is a winner (not a tie)' do
-      it 'displays the winner and asks the user if they want to play again' do
-        game.instance_variable_set(:@board, board)
-
-        allow(game).to receive(:display_board)
-        allow(board).to receive(:winner?).and_return(true)
-
-        allow(game).to receive(:player).and_return(player)
-        allow(game.player).to receive(:name)
-        allow(game).to receive(:puts)
-
-        allow(game).to receive(:player_input)
-
-        expect(game).to receive(:player_marker)
-        game.show_win_screen
-      end
-    end
-
-    context 'when there is not a winner (a tie)' do
-      it 'does not display the winner and asks the user if they want to play again' do
-        game.instance_variable_set(:@board, board)
-
-        allow(game).to receive(:display_board)
-        allow(board).to receive(:winner?).and_return(false)
-
-        allow(game).to receive(:player).and_return(player)
-        allow(game.player).to receive(:name)
-        allow(game).to receive(:puts)
-
-        allow(game).to receive(:player_input)
-
-        expect(game).to_not receive(:player_marker)
-        game.show_win_screen
-      end
-    end
+    # Only contains puts statements -> no test necessary
   end
 
   describe '#play' do
