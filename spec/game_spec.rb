@@ -59,6 +59,22 @@ RSpec.describe Game do
         game.input_position
       end
     end
+
+    context 'when board.valid_position? is false once' do
+      before do
+        game.instance_variable_set(:@board, board)
+
+        allow(board).to receive(:valid_position?).and_return(false, true)
+        allow(game).to receive(:player_marker)
+        allow(game).to receive(:puts)
+        allow(game).to receive(:player_input).and_return('7')
+      end
+      
+      it 'returns the position entered by the player' do
+        position = game.input_position
+        expect(position).to eq('7')
+      end
+    end
   end
 
   describe '#game_loop' do
