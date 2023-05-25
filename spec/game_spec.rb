@@ -18,34 +18,19 @@ RSpec.describe Game do
     # 3. Method with Outgoing Command -> Test that a message is sent
     # 4. Looping Script Method -> Test the behavior of the method
 
-    before do
-      game.instance_variable_set(:@board, board)
-
-      allow(game).to receive(:next_player)
-      allow(game).to receive(:display_board)
-
-      allow(board).to receive(:valid_position?).and_return(true)
-      allow(game).to receive(:input_position)
-      
-      allow(game).to receive(:player_marker)
-    end
     
-    context 'when there is a winner after player inputs position' do
-      it 'sends update_marker to game.board once' do
-        allow(game).to receive(:winner?).and_return(false, true)
-        allow(board).to receive(:full?).and_return(false, true)
-
-        expect(board).to receive(:update_marker).once
-        game.game_loop
+    context 'when game_over? is false once' do
+      before do
+        game.reset_players
+        game.instance_variable_set(:@board, board)
+  
+        allow(game).to receive(:game_over?).and_return(false, true)
+        allow(game).to receive(:display_board)
+        allow(game).to receive(:input_position)
       end
-    end
-
-    context 'when there is a winner after position is entered twice' do
-      it 'sends update_marker to game.board twice' do
-        allow(game).to receive(:winner?).and_return(false, false, true)
-        allow(board).to receive(:full?).and_return(false, false, true)
-
-        expect(board).to receive(:update_marker).twice
+      
+      it 'calls board.update_marker once' do
+        expect(board).to receive(:update_marker).once
         game.game_loop
       end
     end

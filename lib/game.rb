@@ -14,7 +14,6 @@ class Game
       position = player_input
     end
     position
-    # input_position until board.valid_position?(position)
   end
 
   def game_loop
@@ -67,11 +66,18 @@ class Game
     winner? || board.full?
   end
 
-  private
+  def reset_players
+    @players = nil
+    Player.reset_players
+    Player.new('X', 'Player 1')
+    Player.new('O', 'Player 2')
+  end
 
   def new_board
     @board = Board.new
   end
+
+  private
 
   def players
     @players ||= Player.players.cycle
@@ -85,10 +91,5 @@ class Game
     gets.chomp.strip
   end
 
-  def reset_players
-    @players = nil
-    Player.reset_players
-    Player.new('X', 'Player 1')
-    Player.new('O', 'Player 2')
-  end
+
 end
