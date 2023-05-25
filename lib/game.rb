@@ -48,6 +48,14 @@ class Game
     end
   end
 
+  def next_player
+    players.next
+  end
+
+  def display_board
+    board.display_board
+  end
+  
   private
 
   def new_board
@@ -58,9 +66,6 @@ class Game
     @players ||= Player.players.cycle
   end
 
-  def display_board
-    board.display_board
-  end
 
   def winner?
     board.winner?
@@ -74,9 +79,6 @@ class Game
     player.marker
   end
 
-  def next_player
-    players.next
-  end
 
   def reset_players
     @players = nil

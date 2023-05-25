@@ -13,6 +13,10 @@ RSpec.describe Game do
   end
 
   describe '#game_loop' do
+    # 1. Command Method -> Test the change in the observable state
+    # 3. Method with Outgoing Command -> Test that a message is sent
+    # 4. Looping Script Method -> Test the behavior of the method
+
     before do
       game.instance_variable_set(:@board, Board.new)
 
@@ -110,6 +114,13 @@ RSpec.describe Game do
         game.play
       end
     end
+  end
+
+  describe '#next_player' do
+
+  end
+
+  describe '#display_board' do
 
   end
 end
