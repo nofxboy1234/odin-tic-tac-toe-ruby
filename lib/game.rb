@@ -8,8 +8,13 @@ class Game
   attr_reader :board, :player
 
   def input_position
-    puts "Please choose a position (0-8) to place your #{player_marker} marker"
-    player_input
+    position = '-1'
+    until board.valid_position?(position)
+      puts "Please choose a position (0-8) to place your #{player_marker} marker"
+      position = player_input
+    end
+    position
+    # input_position until board.valid_position?(position)
   end
 
   def game_loop
@@ -17,9 +22,10 @@ class Game
       next_player
       display_board
 
-      position = input_position until board.valid_position?(position)
+      # input_position
+      # position = input_position until board.valid_position?(position)
 
-      board.update_marker(position.to_i, player_marker)
+      board.update_marker(input_position.to_i, player_marker)
     end
   end
 
