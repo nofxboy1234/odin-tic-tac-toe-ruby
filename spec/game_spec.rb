@@ -6,6 +6,7 @@ require './lib/game'
 # 4. Looping Script Method -> Test the behavior of the method
 
 RSpec.describe Game do
+  let(:board) { double('board')}
   subject(:game) { Game.new }
 
   describe '#input_position' do
@@ -18,22 +19,23 @@ RSpec.describe Game do
     # 4. Looping Script Method -> Test the behavior of the method
 
     before do
-      game.instance_variable_set(:@board, Board.new)
+      game.instance_variable_set(:@board, board)
 
       allow(game).to receive(:next_player)
       allow(game).to receive(:display_board)
 
-      allow(game.board).to receive(:valid_position?).and_return(true)
+      allow(board).to receive(:valid_position?).and_return(true)
       allow(game).to receive(:input_position)
-
+      
       allow(game).to receive(:player_marker)
     end
-
+    
     context 'when there is a winner after player inputs position' do
       it 'sends update_marker to game.board once' do
         allow(game).to receive(:winner?).and_return(false, true)
+        allow(board).to receive(:full?).and_return(false, true)
 
-        expect(game.board).to receive(:update_marker).once
+        expect(board).to receive(:update_marker).once
         game.game_loop
       end
     end
@@ -41,8 +43,9 @@ RSpec.describe Game do
     context 'when there is a winner after position is entered twice' do
       it 'sends update_marker to game.board twice' do
         allow(game).to receive(:winner?).and_return(false, false, true)
+        allow(board).to receive(:full?).and_return(false, false, true)
 
-        expect(game.board).to receive(:update_marker).twice
+        expect(board).to receive(:update_marker).twice
         game.game_loop
       end
     end
@@ -53,10 +56,10 @@ RSpec.describe Game do
 
     context 'when there is a winner (not a tie)' do
       it 'displays the winner and asks the user if they want to play again' do
-        game.instance_variable_set(:@board, Board.new)
-
+        game.instance_variable_set(:@board, board)
+        
         allow(game).to receive(:display_board)
-        allow(game.board).to receive(:winner?).and_return(true)
+        allow(board).to receive(:winner?).and_return(true)
 
         allow(game).to receive(:player).and_return(player)
         allow(game.player).to receive(:name)
@@ -71,10 +74,10 @@ RSpec.describe Game do
 
     context 'when there is not a winner (a tie)' do
       it 'does not display the winner and asks the user if they want to play again' do
-        game.instance_variable_set(:@board, Board.new)
+        game.instance_variable_set(:@board, board)
         
         allow(game).to receive(:display_board)
-        allow(game.board).to receive(:winner?).and_return(false)
+        allow(board).to receive(:winner?).and_return(false)
 
         allow(game).to receive(:player).and_return(player)
         allow(game.player).to receive(:name)
