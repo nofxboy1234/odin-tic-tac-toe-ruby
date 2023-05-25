@@ -14,7 +14,6 @@ RSpec.describe Game do
   end
 
   describe '#game_loop' do
-    # 1. Command Method -> Test the change in the observable state
     # 3. Method with Outgoing Command -> Test that a message is sent
     # 4. Looping Script Method -> Test the behavior of the method
 
