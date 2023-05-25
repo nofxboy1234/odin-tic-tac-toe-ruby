@@ -18,12 +18,9 @@ class Game
   end
 
   def game_loop
-    until winner? || board.full?
+    until game_over?
       next_player
       display_board
-
-      # input_position
-      # position = input_position until board.valid_position?(position)
 
       board.update_marker(input_position.to_i, player_marker)
     end
