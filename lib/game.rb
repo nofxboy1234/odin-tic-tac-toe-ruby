@@ -9,6 +9,10 @@ require 'pry-byebug'
 class Game
   attr_reader :board, :player
 
+  def initialize(board = Board.new)
+    @board = board
+  end
+
   def input_position
     position = '-1'
     until board.valid_position?(position)

@@ -394,6 +394,9 @@ RSpec.describe Game do
       expect { game.new_board }.to change { game.instance_variable_get(:@board) }
     end
 
+    subject(:game) { Game.new(board) }
+    let(:board) { double('board') }
+
     it 'sends new message to Board' do
       expect(Board).to receive(:new)
       game.new_board
