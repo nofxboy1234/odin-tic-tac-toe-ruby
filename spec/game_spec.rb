@@ -1,7 +1,5 @@
 require './lib/game'
 
-require 'pry-byebug'
-
 # 1. Command Method -> Test the change in the observable state
 # 2. Query Method -> Test the return value
 # 3. Method with Outgoing Command -> Test that a message is sent

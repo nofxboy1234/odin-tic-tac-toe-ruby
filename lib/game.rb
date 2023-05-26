@@ -3,8 +3,6 @@
 require './lib/player'
 require './lib/board'
 
-require 'pry-byebug'
-
 # Game class
 class Game
   attr_reader :board, :player
