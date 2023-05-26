@@ -367,5 +367,22 @@ RSpec.describe Game do
       end
     end
 
+    before do
+      allow(Player).to receive(:new).twice
+    end
+    
+    it 'changes @players to nil' do
+      expect(Player).to receive(:reset_players)
+      game.reset_players
+    end
+    
+    before do
+      allow(Player).to receive(:reset_players)
+    end
+    
+    it 'changes @players to nil' do
+      expect(Player).to receive(:new).twice
+      game.reset_players
+    end
   end
 end
