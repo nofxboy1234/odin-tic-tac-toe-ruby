@@ -207,7 +207,7 @@ RSpec.describe Game do
 
       it 'sets player to "Player 1"' do
         expect { game.next_player }.to change { game.player.name }
-        .from('Player 2').to('Player 1')
+          .from('Player 2').to('Player 1')
       end
     end
   end
@@ -226,7 +226,7 @@ RSpec.describe Game do
 
   describe '#player_marker' do
     # Query method - test the return value
-    
+
     context 'when current player is "Player 1"' do
       before do
         game.reset_players
@@ -251,5 +251,121 @@ RSpec.describe Game do
         expect(marker).to eq('O')
       end
     end
+  end
+
+  describe '#game_over' do
+    # Query method - test the return value
+    # Method with outgoing command - test that the message is sent
+
+    context 'when there is a winner and board is not full' do
+      before do
+        game.instance_variable_set(:@board, board)
+
+        allow(game).to receive(:winner?).and_return(true)
+        allow(board).to receive(:full?).and_return(false)
+      end
+
+      it 'is game_over' do
+        expect(game).to be_game_over
+      end
+    end
+
+    context 'when there is not a winner and board is full' do
+      before do
+        game.instance_variable_set(:@board, board)
+
+        allow(game).to receive(:winner?).and_return(false)
+        allow(board).to receive(:full?).and_return(true)
+      end
+
+      it 'is game_over' do
+        expect(game).to be_game_over
+      end
+    end
+
+    context 'when there is a winner and board is full' do
+      before do
+        game.instance_variable_set(:@board, board)
+
+        allow(game).to receive(:winner?).and_return(true)
+        allow(board).to receive(:full?).and_return(true)
+      end
+
+      it 'is game_over' do
+        expect(game).to be_game_over
+      end
+    end
+
+    context 'when there is not a winner and board is not full' do
+      before do
+        game.instance_variable_set(:@board, board)
+
+        allow(game).to receive(:winner?).and_return(false)
+        allow(board).to receive(:full?).and_return(false)
+      end
+
+      it 'is game_over' do
+        expect(game).not_to be_game_over
+      end
+    end
+
+    context 'when there is not a winner' do
+      before do
+        game.instance_variable_set(:@board, board)
+
+        allow(game).to receive(:winner?).and_return(false)
+      end
+
+      it 'sends full? message to board' do
+        expect(board).to receive(:full?)
+        game.game_over?
+      end
+    end
+
+    context 'when there is a winner' do
+      before do
+        game.instance_variable_set(:@board, board)
+
+        allow(game).to receive(:winner?).and_return(true)
+      end
+
+      it 'does not send full? message to board' do
+        expect(board).not_to receive(:full?)
+        game.game_over?
+      end
+    end
+  end
+
+  describe '#reset_players' do
+    # Command method - test the change in the observable state
+    # Method with Outgoing Command - test that the message is sent
+
+    context 'when @players is nil' do
+      before do
+        allow(Player).to receive(:reset_players)
+        allow(Player).to receive(:new).twice
+      end
+  
+      it 'does not change @players' do
+        expect { game.reset_players }
+          .not_to change { game.instance_variable_get(:@players) }
+      end
+    end
+
+    context 'when @players is not nil' do
+      before do
+        game.reset_players
+        game.players
+
+        allow(Player).to receive(:reset_players)
+        allow(Player).to receive(:new).twice
+      end
+  
+      it 'changes @players to nil' do
+        expect { game.reset_players }
+          .to change { game.instance_variable_get(:@players) }.to(nil)
+      end
+    end
+
   end
 end

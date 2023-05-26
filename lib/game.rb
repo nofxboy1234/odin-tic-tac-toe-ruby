@@ -86,11 +86,11 @@ class Game
     new_board
   end
 
-  private
-
   def players
     @players ||= Player.players.cycle
   end
+
+  private
 
   def winner?
     board.winner?
