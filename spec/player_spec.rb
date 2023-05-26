@@ -10,7 +10,7 @@ RSpec.describe Player do
     # 1. Command Method -> Test the change in the observable state
     context 'when @players is empty' do
       before do
-        described_class.instance_variable_set(:@players, [])
+        described_class.reset_players
       end
 
       it 'adds self to @players' do
@@ -21,7 +21,7 @@ RSpec.describe Player do
 
     context 'when @players is not empty' do
       before do
-        described_class.instance_variable_set(:@players, [])
+        described_class.reset_players
         described_class.new('X', 'Player 1')
       end
 
@@ -37,7 +37,7 @@ RSpec.describe Player do
     # 1. Command Method -> Test the change in the observable state
     context 'when @players is empty' do
       before do
-        described_class.instance_variable_set(:@players, [])
+        described_class.reset_players
       end
 
       it 'clears the @players array' do
@@ -48,7 +48,7 @@ RSpec.describe Player do
 
     context 'when @players is not empty' do
       before do
-        described_class.instance_variable_set(:@players, [])
+        described_class.reset_players
         described_class.new('X', 'Player 1')
       end
 
