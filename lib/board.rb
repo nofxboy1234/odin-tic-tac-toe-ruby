@@ -15,8 +15,8 @@ class Board
     [2, 4, 6]
   ].freeze
 
-  def initialize
-    @markers = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+  def initialize(markers = [0, 1, 2, 3, 4, 5, 6, 7, 8])
+    @markers = markers
   end
 
   def update_marker(position, marker)
