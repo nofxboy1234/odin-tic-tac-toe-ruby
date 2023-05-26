@@ -199,11 +199,28 @@ RSpec.describe Game do
     end
 
     context 'when player is "Player 2"' do
+      before do
+        game.reset_players
+        game.next_player
+        game.next_player
+      end
+
       it 'sets player to "Player 1"' do
+        expect { game.next_player }.to change { game.player.name }
+        .from('Player 2').to('Player 1')
       end
     end
   end
 
   describe '#display_board' do
+    # Method with Outgoing Command - test that the message gets sent
+    before do
+      game.instance_variable_set(:@board, board)
+    end
+
+    it 'sends display_board message to board' do
+      expect(board).to receive(:display_board)
+      game.display_board
+    end
   end
 end
