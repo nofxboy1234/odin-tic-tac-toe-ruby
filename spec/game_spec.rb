@@ -8,8 +8,8 @@ require 'pry-byebug'
 # 4. Looping Script Method -> Test the behavior of the method
 
 RSpec.describe Game do
+  subject(:game) { Game.new(board) }
   let(:board) { double('board') }
-  subject(:game) { Game.new }
 
   describe '#input_position' do
     # 3. Method with Outgoing Command -> Test that a message is sent
@@ -18,8 +18,6 @@ RSpec.describe Game do
 
     context 'when player inputs a valid position the first time' do
       before do
-        game.instance_variable_set(:@board, board)
-
         allow(board).to receive(:valid_position?).and_return(false, true)
         allow(game).to receive(:player_marker)
         allow(game).to receive(:puts)
@@ -34,8 +32,6 @@ RSpec.describe Game do
 
     context 'when board.valid_position? is false once' do
       before do
-        game.instance_variable_set(:@board, board)
-
         allow(board).to receive(:valid_position?).and_return(false, true)
         allow(game).to receive(:player_marker)
         allow(game).to receive(:puts)
@@ -49,8 +45,6 @@ RSpec.describe Game do
 
     context 'when board.valid_position? is false twice' do
       before do
-        game.instance_variable_set(:@board, board)
-
         allow(board).to receive(:valid_position?).and_return(false, false, true)
         allow(game).to receive(:player_marker)
         allow(game).to receive(:puts)
@@ -64,8 +58,6 @@ RSpec.describe Game do
 
     context 'when board.valid_position? is false once' do
       before do
-        game.instance_variable_set(:@board, board)
-
         allow(board).to receive(:valid_position?).and_return(false, true)
         allow(game).to receive(:player_marker)
         allow(game).to receive(:puts)
@@ -86,7 +78,6 @@ RSpec.describe Game do
     context 'when game_over? is false once' do
       before do
         game.reset_players
-        game.instance_variable_set(:@board, board)
 
         allow(game).to receive(:game_over?).and_return(false, true)
         allow(game).to receive(:display_board)
@@ -102,7 +93,6 @@ RSpec.describe Game do
     context 'when game_over? is false twice' do
       before do
         game.reset_players
-        game.instance_variable_set(:@board, board)
 
         allow(game).to receive(:game_over?).and_return(false, false, true)
         allow(game).to receive(:display_board)
@@ -118,7 +108,6 @@ RSpec.describe Game do
     context 'when game_over? is false five times' do
       before do
         game.reset_players
-        game.instance_variable_set(:@board, board)
 
         allow(game).to receive(:game_over?)
           .and_return(false, false, false, false, false, true)
@@ -214,9 +203,6 @@ RSpec.describe Game do
 
   describe '#display_board' do
     # Method with Outgoing Command - test that the message gets sent
-    before do
-      game.instance_variable_set(:@board, board)
-    end
 
     it 'sends display_board message to board' do
       expect(board).to receive(:display_board)
@@ -259,8 +245,6 @@ RSpec.describe Game do
 
     context 'when there is a winner and board is not full' do
       before do
-        game.instance_variable_set(:@board, board)
-
         allow(game).to receive(:winner?).and_return(true)
         allow(board).to receive(:full?).and_return(false)
       end
@@ -272,8 +256,6 @@ RSpec.describe Game do
 
     context 'when there is not a winner and board is full' do
       before do
-        game.instance_variable_set(:@board, board)
-
         allow(game).to receive(:winner?).and_return(false)
         allow(board).to receive(:full?).and_return(true)
       end
@@ -285,8 +267,6 @@ RSpec.describe Game do
 
     context 'when there is a winner and board is full' do
       before do
-        game.instance_variable_set(:@board, board)
-
         allow(game).to receive(:winner?).and_return(true)
         allow(board).to receive(:full?).and_return(true)
       end
@@ -298,8 +278,6 @@ RSpec.describe Game do
 
     context 'when there is not a winner and board is not full' do
       before do
-        game.instance_variable_set(:@board, board)
-
         allow(game).to receive(:winner?).and_return(false)
         allow(board).to receive(:full?).and_return(false)
       end
@@ -311,8 +289,6 @@ RSpec.describe Game do
 
     context 'when there is not a winner' do
       before do
-        game.instance_variable_set(:@board, board)
-
         allow(game).to receive(:winner?).and_return(false)
       end
 
@@ -324,8 +300,6 @@ RSpec.describe Game do
 
     context 'when there is a winner' do
       before do
-        game.instance_variable_set(:@board, board)
-
         allow(game).to receive(:winner?).and_return(true)
       end
 
@@ -393,9 +367,6 @@ RSpec.describe Game do
     it 'sets @board to a new Board' do
       expect { game.new_board }.to change { game.instance_variable_get(:@board) }
     end
-
-    subject(:game) { Game.new(board) }
-    let(:board) { double('board') }
 
     it 'sends new message to Board' do
       expect(Board).to receive(:new)
