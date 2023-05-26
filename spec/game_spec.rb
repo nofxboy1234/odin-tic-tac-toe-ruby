@@ -1,5 +1,7 @@
 require './lib/game'
 
+require 'pry-byebug'
+
 # 1. Command Method -> Test the change in the observable state
 # 2. Query Method -> Test the return value
 # 3. Method with Outgoing Command -> Test that a message is sent
@@ -38,7 +40,7 @@ RSpec.describe Game do
         allow(game).to receive(:player_marker)
         allow(game).to receive(:puts)
       end
-      
+
       it 'calls player_input once' do
         expect(game).to receive(:player_input).once
         game.input_position
@@ -53,7 +55,7 @@ RSpec.describe Game do
         allow(game).to receive(:player_marker)
         allow(game).to receive(:puts)
       end
-      
+
       it 'calls player_input twice' do
         expect(game).to receive(:player_input).twice
         game.input_position
@@ -69,7 +71,7 @@ RSpec.describe Game do
         allow(game).to receive(:puts)
         allow(game).to receive(:player_input).and_return('7')
       end
-      
+
       it 'returns the position entered by the player' do
         position = game.input_position
         expect(position).to eq('7')
@@ -168,6 +170,38 @@ RSpec.describe Game do
   end
 
   describe '#next_player' do
+    # 1. Command Method -> Test the change in the observable state
+
+    context 'when player is nil' do
+      before do
+        game.reset_players
+      end
+
+      it 'sets player to "Player 1"' do
+        game.next_player
+
+        player = game.player
+
+        expect(player.name).to eq('Player 1')
+      end
+    end
+
+    context 'when player is "Player 1"' do
+      before do
+        game.reset_players
+        game.next_player
+      end
+
+      it 'sets player to "Player 2"' do
+        expect { game.next_player }.to change { game.player.name }
+          .from('Player 1').to('Player 2')
+      end
+    end
+
+    context 'when player is "Player 2"' do
+      it 'sets player to "Player 1"' do
+      end
+    end
   end
 
   describe '#display_board' do
