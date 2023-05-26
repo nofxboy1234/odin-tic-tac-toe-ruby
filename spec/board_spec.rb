@@ -56,10 +56,10 @@ RSpec.describe Board do
     end
 
     context 'when position is taken by another marker' do
-      it 'returns false' do
-        markers = ['X', 1, 2, 3, 4, 5, 6, 7, 8]
-        board.instance_variable_set(:@markers, markers)
+      subject(:board) { described_class.new(markers) }
+      let(:markers) { ['X', 1, 2, 3, 4, 5, 6, 7, 8] }
 
+      it 'returns false' do
         invalid_position = '0'
 
         valid = board.valid_position?(invalid_position)
@@ -72,10 +72,10 @@ RSpec.describe Board do
   describe '#winner?' do
     # 2. Query Method -> Test the return value
     context 'when first row is 3 of the same marker' do
-      it 'returns true' do
-        markers = ['X', 'X', 'X', 3, 4, 5, 6, 7, 8]
-        board.instance_variable_set(:@markers, markers)
+      subject(:board) { described_class.new(markers) }
+      let(:markers) { ['X', 'X', 'X', 3, 4, 5, 6, 7, 8] }
 
+      it 'returns true' do
         is_winner = board.winner?
 
         expect(is_winner).to eq(true)
@@ -83,10 +83,10 @@ RSpec.describe Board do
     end
 
     context 'when second row is 3 of the same marker' do
-      it 'returns true' do
-        markers = [0, 1, 2, 'X', 'X', 'X', 6, 7, 8]
-        board.instance_variable_set(:@markers, markers)
+      subject(:board) { described_class.new(markers) }
+      let(:markers) { [0, 1, 2, 'X', 'X', 'X', 6, 7, 8] }
 
+      it 'returns true' do
         is_winner = board.winner?
 
         expect(is_winner).to eq(true)
@@ -94,10 +94,10 @@ RSpec.describe Board do
     end
 
     context 'when third row is 3 of the same marker' do
-      it 'returns true' do
-        markers = [0, 1, 2, 3, 4, 5, 'O', 'O', 'O']
-        board.instance_variable_set(:@markers, markers)
+      subject(:board) { described_class.new(markers) }
+      let(:markers) { [0, 1, 2, 3, 4, 5, 'O', 'O', 'O'] }
 
+      it 'returns true' do
         is_winner = board.winner?
 
         expect(is_winner).to eq(true)
@@ -105,10 +105,10 @@ RSpec.describe Board do
     end
 
     context 'when first column is 3 of the same marker' do
-      it 'returns true' do
-        markers = ['X', 1, 2, 'X', 4, 5, 'X', 7, 8]
-        board.instance_variable_set(:@markers, markers)
+      subject(:board) { described_class.new(markers) }
+      let(:markers) { ['X', 1, 2, 'X', 4, 5, 'X', 7, 8] }
 
+      it 'returns true' do
         is_winner = board.winner?
 
         expect(is_winner).to eq(true)
@@ -116,10 +116,10 @@ RSpec.describe Board do
     end
 
     context 'when second column is 3 of the same marker' do
-      it 'returns true' do
-        markers = [0, 'O', 2, 3, 'O', 5, 6, 'O', 8]
-        board.instance_variable_set(:@markers, markers)
+      subject(:board) { described_class.new(markers) }
+      let(:markers) { [0, 'O', 2, 3, 'O', 5, 6, 'O', 8] }
 
+      it 'returns true' do
         is_winner = board.winner?
 
         expect(is_winner).to eq(true)
@@ -127,10 +127,10 @@ RSpec.describe Board do
     end
 
     context 'when third column is 3 of the same marker' do
-      it 'returns true' do
-        markers = [0, 1, 'X', 3, 4, 'X', 6, 7, 'X']
-        board.instance_variable_set(:@markers, markers)
+      subject(:board) { described_class.new(markers) }
+      let(:markers) { [0, 1, 'X', 3, 4, 'X', 6, 7, 'X'] }
 
+      it 'returns true' do
         is_winner = board.winner?
 
         expect(is_winner).to eq(true)
@@ -138,10 +138,10 @@ RSpec.describe Board do
     end
 
     context 'when first diagonal is 3 of the same marker' do
-      it 'returns true' do
-        markers = ['O', 1, 2, 3, 'O', 5, 6, 7, 'O']
-        board.instance_variable_set(:@markers, markers)
+      subject(:board) { described_class.new(markers) }
+      let(:markers) { ['O', 1, 2, 3, 'O', 5, 6, 7, 'O'] }
 
+      it 'returns true' do
         is_winner = board.winner?
 
         expect(is_winner).to eq(true)
@@ -149,10 +149,10 @@ RSpec.describe Board do
     end
 
     context 'when second diagonal is 3 of the same marker' do
-      it 'returns true' do
-        markers = [0, 1, 'X', 3, 'X', 5, 'X', 7, 8]
-        board.instance_variable_set(:@markers, markers)
+      subject(:board) { described_class.new(markers) }
+      let(:markers) { [0, 1, 'X', 3, 'X', 5, 'X', 7, 8] }
 
+      it 'returns true' do
         is_winner = board.winner?
 
         expect(is_winner).to eq(true)
@@ -160,10 +160,10 @@ RSpec.describe Board do
     end
 
     context 'when a row is different markers' do
-      it 'returns false' do
-        markers = ['X', 'X', 'O', 3, 4, 5, 6, 7, 8]
-        board.instance_variable_set(:@markers, markers)
+      subject(:board) { described_class.new(markers) }
+      let(:markers) { ['X', 'X', 'O', 3, 4, 5, 6, 7, 8] }
 
+      it 'returns false' do
         is_winner = board.winner?
 
         expect(is_winner).to eq(false)
@@ -171,10 +171,10 @@ RSpec.describe Board do
     end
 
     context 'when a column is different markers' do
-      it 'returns false' do
-        markers = [0, 'O', 2, 3, 'X', 5, 6, 'O', 8]
-        board.instance_variable_set(:@markers, markers)
+      subject(:board) { described_class.new(markers) }
+      let(:markers) { [0, 'O', 2, 3, 'X', 5, 6, 'O', 8] }
 
+      it 'returns false' do
         is_winner = board.winner?
 
         expect(is_winner).to eq(false)
@@ -182,10 +182,10 @@ RSpec.describe Board do
     end
 
     context 'when a diagonal is different markers' do
-      it 'returns false' do
-        markers = ['X', 1, 2, 3, 4, 5, 6, 7, 'O']
-        board.instance_variable_set(:@markers, markers)
+      subject(:board) { described_class.new(markers) }
+      let(:markers) { ['X', 1, 2, 3, 4, 5, 6, 7, 'O'] }
 
+      it 'returns false' do
         is_winner = board.winner?
 
         expect(is_winner).to eq(false)
@@ -197,19 +197,19 @@ RSpec.describe Board do
     # 2. Query Method -> Test the return value
 
     context 'when the board is filled with markers' do
+      subject(:board) { described_class.new(markers) }
+      let(:markers) { ['X', 'O', 'X', 'X', 'X', 'O', 'O', 'O', 'O'] }
+
       it 'returns true' do
-        markers = ['X', 'O', 'X', 'X', 'X', 'O', 'O', 'O', 'O']
-        board.instance_variable_set(:@markers, markers)
-        
         expect(board).to be_full
       end
     end
 
     context 'when the board is not filled with markers' do
+      subject(:board) { described_class.new(markers) }
+      let(:markers) { ['X', 'O', 'X', 'X', 'X', 'O', 'O', 'O', 8] }
+
       it 'returns false' do
-        markers = ['X', 'O', 'X', 'X', 'X', 'O', 'O', 'O', 8]
-        board.instance_variable_set(:@markers, markers)
-        
         expect(board).not_to be_full
       end
     end
