@@ -385,4 +385,34 @@ RSpec.describe Game do
       game.reset_players
     end
   end
+
+  describe '#new_board' do
+    # Command method
+    # Method with Outgoing Command
+
+    it 'sets @board to a new Board' do
+      expect { game.new_board }.to change { game.instance_variable_get(:@board) }
+    end
+
+    it 'sends new message to Board' do
+      expect(Board).to receive(:new)
+      game.new_board
+    end
+  end
+
+  describe '#prompt_to_play_again' do
+    # Query method
+
+    before do
+      allow(game).to receive(:puts)
+      allow(game).to receive(:player_input).and_return('y')
+    end
+
+    it 'returns the player input' do
+      response = game.prompt_to_play_again
+      expect(response).to eq('y')
+    end
+  end
+
+  
 end
