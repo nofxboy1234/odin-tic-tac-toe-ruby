@@ -414,5 +414,18 @@ RSpec.describe Game do
     end
   end
 
-  
+  describe '#set_up' do
+    # Public script method - no test necessary
+    # Methods called inside #set_up are tested separately
+  end
+
+  describe '#players' do
+    # Command method
+
+    context 'when @players is not set' do
+      it 'sets the value of players' do
+        expect { game.players }.to change { game.instance_variable_get(:@players) }
+      end
+    end
+  end
 end
