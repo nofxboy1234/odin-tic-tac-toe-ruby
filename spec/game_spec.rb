@@ -223,4 +223,33 @@ RSpec.describe Game do
       game.display_board
     end
   end
+
+  describe '#player_marker' do
+    # Query method - test the return value
+    
+    context 'when current player is "Player 1"' do
+      before do
+        game.reset_players
+        game.next_player
+      end
+
+      it 'returns the current player marker symbol' do
+        marker = game.player_marker
+        expect(marker).to eq('X')
+      end
+    end
+
+    context 'when current player is "Player 2"' do
+      before do
+        game.reset_players
+        game.next_player
+        game.next_player
+      end
+
+      it 'returns the current player marker symbol' do
+        marker = game.player_marker
+        expect(marker).to eq('O')
+      end
+    end
+  end
 end
