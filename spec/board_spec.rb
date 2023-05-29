@@ -9,12 +9,12 @@ require './lib/board'
 
 RSpec.describe Board do
   subject(:board) { described_class.new }
+  let(:position) { 0 }
 
   describe '#update_marker' do
     # 1. Command Method -> Test the change in the observable state
 
     it 'updates the markers array' do
-      position = 0
       marker = 'X'
       board.update_marker(position, marker)
 
@@ -24,38 +24,37 @@ RSpec.describe Board do
 
   describe '#valid_position?' do
     # 2. Query Method -> Test the return value
+    let(:position_input) { '0' }
+
     context 'when position is valid' do
       it 'returns true' do
-        valid_position = '0'
-
-        expect(board.valid_position?(valid_position)).to eq(true)
+        expect(board.valid_position?(position_input)).to eq(true)
       end
     end
 
     context 'when position is not a "number string"' do
-      it 'returns false' do
-        invalid_position = 'a'
+      let(:position_input) { 'a' }
 
-        expect(board.valid_position?(invalid_position)).to eq(false)
+      it 'returns false' do
+        expect(board.valid_position?(position_input)).to eq(false)
       end
     end
 
     context 'when position is outside the board position range' do
-      it 'returns false' do
-        invalid_position = '9'
+      let(:position_input) { '9' }
 
-        expect(board.valid_position?(invalid_position)).to eq(false)
+      it 'returns false' do
+        expect(board.valid_position?(position_input)).to eq(false)
       end
     end
 
     context 'when position is taken by another marker' do
       subject(:board) { described_class.new(markers) }
       let(:markers) { ['X', 1, 2, 3, 4, 5, 6, 7, 8] }
+      let(:position_input) { '0' }
 
       it 'returns false' do
-        invalid_position = '0'
-
-        expect(board.valid_position?(invalid_position)).to eq(false)
+        expect(board.valid_position?(position_input)).to eq(false)
       end
     end
   end
