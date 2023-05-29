@@ -76,7 +76,6 @@ RSpec.describe Game do
     context 'when game_over? is false once' do
       before do
         game.reset_players
-
         allow(game).to receive(:game_over?).and_return(false, true)
         allow(game).to receive(:display_board)
         allow(game).to receive(:input_position)
@@ -91,7 +90,6 @@ RSpec.describe Game do
     context 'when game_over? is false twice' do
       before do
         game.reset_players
-
         allow(game).to receive(:game_over?).and_return(false, false, true)
         allow(game).to receive(:display_board)
         allow(game).to receive(:input_position)
@@ -106,7 +104,6 @@ RSpec.describe Game do
     context 'when game_over? is false five times' do
       before do
         game.reset_players
-
         allow(game).to receive(:game_over?)
           .and_return(false, false, false, false, false, true)
         allow(game).to receive(:display_board)
@@ -166,7 +163,6 @@ RSpec.describe Game do
 
       it 'sets player to "Player 1"' do
         game.next_player
-
         player = game.player
 
         expect(player.name).to eq('Player 1')
@@ -328,7 +324,6 @@ RSpec.describe Game do
       before do
         game.reset_players
         game.players
-
         allow(Player).to receive(:reset_players)
         allow(Player).to receive(:new).twice
       end

@@ -26,7 +26,6 @@ RSpec.describe Player do
       end
 
       it 'adds self to @players' do
-
         expect { described_class.new('X', 'Player 1') }
           .to change { described_class.players.size }.from(1).to(2)
       end
