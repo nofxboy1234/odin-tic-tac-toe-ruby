@@ -16,7 +16,6 @@ RSpec.describe Board do
     it 'updates the markers array' do
       position = 0
       marker = 'X'
-      
       board.update_marker(position, marker)
 
       expect(board.markers[0]).to eq('X')
@@ -29,9 +28,7 @@ RSpec.describe Board do
       it 'returns true' do
         valid_position = '0'
 
-        valid = board.valid_position?(valid_position)
-
-        expect(valid).to eq(true)
+        expect(board.valid_position?(valid_position)).to eq(true)
       end
     end
 
@@ -39,9 +36,7 @@ RSpec.describe Board do
       it 'returns false' do
         invalid_position = 'a'
 
-        valid = board.valid_position?(invalid_position)
-
-        expect(valid).to eq(false)
+        expect(board.valid_position?(invalid_position)).to eq(false)
       end
     end
 
@@ -49,9 +44,7 @@ RSpec.describe Board do
       it 'returns false' do
         invalid_position = '9'
 
-        valid = board.valid_position?(invalid_position)
-
-        expect(valid).to eq(false)
+        expect(board.valid_position?(invalid_position)).to eq(false)
       end
     end
 
@@ -62,9 +55,7 @@ RSpec.describe Board do
       it 'returns false' do
         invalid_position = '0'
 
-        valid = board.valid_position?(invalid_position)
-
-        expect(valid).to eq(false)
+        expect(board.valid_position?(invalid_position)).to eq(false)
       end
     end
   end
@@ -76,9 +67,7 @@ RSpec.describe Board do
       let(:markers) { ['X', 'X', 'X', 3, 4, 5, 6, 7, 8] }
 
       it 'returns true' do
-        is_winner = board.winner?
-
-        expect(is_winner).to eq(true)
+        expect(board.winner?).to eq(true)
       end
     end
 
@@ -87,9 +76,7 @@ RSpec.describe Board do
       let(:markers) { [0, 1, 2, 'X', 'X', 'X', 6, 7, 8] }
 
       it 'returns true' do
-        is_winner = board.winner?
-
-        expect(is_winner).to eq(true)
+        expect(board.winner?).to eq(true)
       end
     end
 
@@ -98,9 +85,7 @@ RSpec.describe Board do
       let(:markers) { [0, 1, 2, 3, 4, 5, 'O', 'O', 'O'] }
 
       it 'returns true' do
-        is_winner = board.winner?
-
-        expect(is_winner).to eq(true)
+        expect(board.winner?).to eq(true)
       end
     end
 
@@ -109,9 +94,7 @@ RSpec.describe Board do
       let(:markers) { ['X', 1, 2, 'X', 4, 5, 'X', 7, 8] }
 
       it 'returns true' do
-        is_winner = board.winner?
-
-        expect(is_winner).to eq(true)
+        expect(board.winner?).to eq(true)
       end
     end
 
@@ -120,9 +103,7 @@ RSpec.describe Board do
       let(:markers) { [0, 'O', 2, 3, 'O', 5, 6, 'O', 8] }
 
       it 'returns true' do
-        is_winner = board.winner?
-
-        expect(is_winner).to eq(true)
+        expect(board.winner?).to eq(true)
       end
     end
 
@@ -131,9 +112,7 @@ RSpec.describe Board do
       let(:markers) { [0, 1, 'X', 3, 4, 'X', 6, 7, 'X'] }
 
       it 'returns true' do
-        is_winner = board.winner?
-
-        expect(is_winner).to eq(true)
+        expect(board.winner?).to eq(true)
       end
     end
 
@@ -142,9 +121,7 @@ RSpec.describe Board do
       let(:markers) { ['O', 1, 2, 3, 'O', 5, 6, 7, 'O'] }
 
       it 'returns true' do
-        is_winner = board.winner?
-
-        expect(is_winner).to eq(true)
+        expect(board.winner?).to eq(true)
       end
     end
 
@@ -153,9 +130,7 @@ RSpec.describe Board do
       let(:markers) { [0, 1, 'X', 3, 'X', 5, 'X', 7, 8] }
 
       it 'returns true' do
-        is_winner = board.winner?
-
-        expect(is_winner).to eq(true)
+        expect(board.winner?).to eq(true)
       end
     end
 
@@ -164,9 +139,7 @@ RSpec.describe Board do
       let(:markers) { ['X', 'X', 'O', 3, 4, 5, 6, 7, 8] }
 
       it 'returns false' do
-        is_winner = board.winner?
-
-        expect(is_winner).to eq(false)
+        expect(board.winner?).to eq(false)
       end
     end
 
@@ -175,9 +148,7 @@ RSpec.describe Board do
       let(:markers) { [0, 'O', 2, 3, 'X', 5, 6, 'O', 8] }
 
       it 'returns false' do
-        is_winner = board.winner?
-
-        expect(is_winner).to eq(false)
+        expect(board.winner?).to eq(false)
       end
     end
 
@@ -186,9 +157,7 @@ RSpec.describe Board do
       let(:markers) { ['X', 1, 2, 3, 4, 5, 6, 7, 'O'] }
 
       it 'returns false' do
-        is_winner = board.winner?
-
-        expect(is_winner).to eq(false)
+        expect(board.winner?).to eq(false)
       end
     end
   end
