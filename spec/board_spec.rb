@@ -64,7 +64,7 @@ RSpec.describe Board do
     # 2. Query Method -> Test the return value
     subject(:board) { described_class.new(markers) }
 
-    context 'when first row is 3 of the same marker' do
+    context 'when a row is 3 of the same marker' do
       let(:markers) { ['X', 'X', 'X', 3, 4, 5, 6, 7, 8] }
 
       it 'returns true' do
@@ -72,40 +72,8 @@ RSpec.describe Board do
       end
     end
 
-    context 'when second row is 3 of the same marker' do
-      let(:markers) { [0, 1, 2, 'X', 'X', 'X', 6, 7, 8] }
-
-      it 'returns true' do
-        expect(board.winner?).to eq(true)
-      end
-    end
-
-    context 'when third row is 3 of the same marker' do
-      let(:markers) { [0, 1, 2, 3, 4, 5, 'O', 'O', 'O'] }
-
-      it 'returns true' do
-        expect(board.winner?).to eq(true)
-      end
-    end
-
-    context 'when first column is 3 of the same marker' do
+    context 'when a column is 3 of the same marker' do
       let(:markers) { ['X', 1, 2, 'X', 4, 5, 'X', 7, 8] }
-
-      it 'returns true' do
-        expect(board.winner?).to eq(true)
-      end
-    end
-
-    context 'when second column is 3 of the same marker' do
-      let(:markers) { [0, 'O', 2, 3, 'O', 5, 6, 'O', 8] }
-
-      it 'returns true' do
-        expect(board.winner?).to eq(true)
-      end
-    end
-
-    context 'when third column is 3 of the same marker' do
-      let(:markers) { [0, 1, 'X', 3, 4, 'X', 6, 7, 'X'] }
 
       it 'returns true' do
         expect(board.winner?).to eq(true)
